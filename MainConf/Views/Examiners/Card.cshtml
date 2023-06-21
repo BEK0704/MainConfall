@@ -1,0 +1,43 @@
+﻿@model MainConf.Models.Seconds.CardModel
+<style>
+
+    table {
+        width: 30%;
+        background-image: url('@Url.Content(Model.Backgroundlink)');
+    }
+
+    td {
+        height: 30px;
+        color: maroon;
+        font-weight: bold;
+    }
+
+    th {
+        background-color: #eee;
+        color: #B87333;
+    }
+</style>
+
+<body>
+    <br>
+    <table style="height: 256px;width: 490px;margin-left: 1%;margin-top: 1%;border-style: dashed;">
+        <tbody>
+            <tr style="height: 14px;">
+                <td style="width: 348px; text-align: center; height: 14px;">
+                    <p>Examiner</p>
+                    <p><img src='@Url.Content(Model.QRCoderlink)' alt="" width="200" height="200" /></p>
+                    <p>&nbsp;JSHIR: @Html.DisplayFor(model => model.Pnfl)</p>
+                </td>
+                <td style="width: 141px; height: 14px; text-align: center;">
+                    <p><br><img src="@ViewBag.imagesrc" alt="" width="115" height="125" /></p>
+                    <p>@Html.DisplayFor(model => model.Fio)</p>
+                    <p>@Html.DisplayFor(model => model.Lan)</p>
+                    <p>@Html.DisplayFor(model => model.Lev)</p>
+                    <p>&nbsp;Toshkent shahri</p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+

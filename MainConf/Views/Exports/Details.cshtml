@@ -1,0 +1,267 @@
+﻿@model MainConf.Models.Seconds.ExpDeatails
+
+@{
+    ViewData["Title"] = "Batafsil";
+}
+
+<div class="card card-info">
+    <div class="card-header">
+        <h3>Ekspert ma'lumotlari</h3>
+        </div>
+    <div class="card-body">
+        <div class="row col-12">
+            <div class="col-4">
+                <center>
+                    @if (Model.Photo.Length < 50)
+                    {
+                        <img src="~/images/123.png" style="max-height:250px;" />
+                    }
+                    else
+                    {
+                        <img src="@Model.Photo" style="max-height:250px;" />
+                    }
+                </center>
+
+                @if (Model.Man > 0)
+                {
+                    <a style="margin-top:1%;" class="btn btn-lg btn-warning btn-block" asp-action="Deactive" asp-route-pnfl="@Model.Pnfl">Apeliyatsiya komessiyasidan chiqarish</a>
+                }
+                else
+                {
+            <a style="margin-top:1%;" class="btn btn-lg btn-success btn-block" asp-action="Active" asp-route-pnfl="@Model.Pnfl">Apeliyatsiya komessiyasiga qo'shish</a>
+                }
+                @if (Model.First == 0 && Model.Second == 0)
+                {
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <button type="button" class="btn bg-lg btn-danger btn-block" data-toggle="modal" data-target="#exampleModal">
+                        Ekspertni o'chirish!
+                    </button>
+
+                }
+                <a type="button" class="btn btn-lg btn-default btn-block" asp-action="Index">
+                    Ortga
+                </a>
+            </div>
+            <div class="col-8">
+                <dl class="row" style="margin-top:1%; font-size:20px;">
+                    <dt class="col-sm-4">
+                        Ekspert FIO
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Exp_fio)
+                    </dd>
+                    <dt class="col-sm-4">
+                        Ekspert JSHIR
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Pnfl)
+                    </dd>
+                    <dt class="col-sm-4">
+                        Tili
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Lan)
+                    </dd>
+                    <dt class="col-sm-4">
+                        Darajasi
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Lev)
+                    </dd>
+
+                    <dt class="col-sm-4">
+                        Telefon
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Phone)
+                    </dd>
+                    <dt class="col-sm-4">
+                        O'xshashlik darajasi
+                    </dt>
+                    <dd class="col-sm-8">
+                        <button type="button" onclick="faceupdate()" class="btn btn-primary">
+                            O'zgartirish
+                        </button>
+                    </dd>
+                    @if (Model.EnterPhoto.Length > 50)
+                    {
+                        <dt class="col-sm-4">
+                            Face control
+                        </dt>
+                        <dd class="col-sm-8">
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal14">
+                                Batafsil
+                            </button>
+                        </dd>
+}
+                    @if (Model.First > 0)
+                    {
+                        <dt class="col-sm-4">
+                            1-Ekspert sifatida
+                        </dt>
+                        <dd class="col-sm-8" style="color:red;">
+                            @Html.DisplayFor(model => model.First) ta ish
+                        </dd>
+                    }
+                    @if (Model.Second > 0)
+                    {
+                        <dt class="col-sm-4">
+                            2-Ekspert sifatida
+                        </dt>
+                        <dd class="col-sm-8" style="color:red;">
+                            @Html.DisplayFor(model => model.Second) ta ish
+                        </dd>
+                    }
+                </dl>
+               
+            
+            </div>
+        </div>
+    </div>
+    </div>
+<input type="hidden" asp-for="Pnfl" id="pnfl" />
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-warning">
+                <h5 class="modal-title" id="exampleModalLabel">Ogohlantirish!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Siz rostan ushbu ekspertni o'chirmoqchimisiz?
+                
+            </div>
+            <div class="modal-footer">
+                <form asp-action="Delete">
+                    <input name="id" type="hidden" asp-for="Exp_id" />
+                    <input type="submit" value="Ha" class="btn btn-danger" /> |
+                </form>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Yo'q</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal12" tabindex="-1" aria-labelledby="exampleModalLabel12" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-warning">
+                <h5 class="modal-title" id="exampleModalLabel12">Yuzni tanish darajasinni o'zgartirish.</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text ">O'xshashlik darajasi</span>
+                    </div>
+                    <input id="daraja" type="number" class="form-control" autocomplete="off" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Bekor qilish</button>
+                <button type="button" onclick="facesave()" class="btn  btn-success">Saqlash</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal14" tabindex="-1" aria-labelledby="exampleModalLabel14" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-info">
+                <h5 class="modal-title" id="exampleModalLabel14">Face Control.</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body row">
+                <div class="alert alert-success col-sm-12" role="alert">
+                    <center> O'xshashlik darajasi: <b>@Html.DisplayFor(model => model.Entertol)</b></center>
+                </div>
+
+                <table class="table">
+
+                    <tbody>
+                        <tr>
+                            <td>
+                                @if (Model.Photo.Length < 50)
+                                {
+                                    <img style="max-height:240px; max-width:100%;" src="~/images/123.png" />
+                                }
+                                else
+                                {
+                                    <img style="        max-height: 240px; max-width:100%;" src="@Model.Photo" />
+                                }
+                            </td>
+                            <td>
+                                @if (Model.EnterPhoto.Length < 50)
+                                {
+                                    <img style="        max-height: 240px; max-width: 100%;" src="~/images/123.png" />
+                                }
+                                else
+                                {
+                                    <img style="        max-height: 240px;  max-width: 100%;" src="@Model.EnterPhoto" />
+                                }
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+
+
+                <div class="alert alert-info col-sm-12" role="alert">
+                    <center>Vaqti: <b>@Html.DisplayFor(model => model.Entertime)</b></center>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Yopish.</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function faceupdate() {
+
+        $.ajax({
+            type: 'POST',
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            data: { parameter1: document.getElementById("pnfl").value },
+            url: "/Account/Entering1",
+            success: function (data) {
+                if (data.lets) {
+                    document.getElementById("daraja").value = (1 - data.positions) * 100;
+                    $("#exampleModal12").modal('show');
+                }
+            }
+        });
+
+    }
+    function facesave() {
+        var a = document.getElementById("daraja").value;
+        a = (1 - (a / 100)).toFixed(1);
+
+        $.ajax({
+            type: 'POST',
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            data: { parameter1: document.getElementById("pnfl").value, parameter2: a },
+            url: "/User/Entering1",
+            success: function (data) {
+                if (data.lets) {
+
+                    $("#exampleModal12").modal('hide');
+                } else {
+                    alert("Saqlashda xatolik");
+                }
+            }
+        });
+        console.log(a);
+
+    }
+</script>

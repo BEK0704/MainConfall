@@ -1,0 +1,113 @@
+﻿@model MainConf.Models.Candidates
+
+@{
+    ViewData["Title"] = "Create";
+}
+<section>
+    <form method="post" asp-action="Create">
+        <div class="card card-info">
+            <div class="card-header">
+                <h3 class="card-title">Yangi nomzod qo'shish!!!</h3>
+            </div>
+            <div class=" card-body col-md-12 col-lg-12 order-2 order-md-1">
+                <div class="row">
+                    <div class="col-md-12">
+                        <center style="margin-top:1%;"><img id="canimg" src="~/images/123.png" alt="Nomzod rasmi" height="250"></center>
+                        <center style="margin-top:1%;"><input type="file" onchange="encodeImageFileAsURL(this)" /></center>
+                    </div>
+                    <div class="col-md-12">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span asp-for="Names" class="input-group-text ">Familiya</span>
+                            </div>
+                            <input asp-for="Last_name" class="form-control"  autocomplete="off"/>
+                            <span asp-validation-for="Last_name" class="text-danger"></span>
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span asp-for="Names" class="input-group-text ">Ism</span>
+                            </div>
+                            <input asp-for="First_name" class="form-control"  autocomplete="off" />
+                            <span asp-validation-for="First_name" class="text-danger"></span>
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span asp-for="Names" class="input-group-text ">Otasining ismi</span>
+                            </div>
+                            <input asp-for="S_name" class="form-control"  autocomplete="off" />
+                            <span asp-validation-for="S_name" class="text-danger"></span>
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span asp-for="Names" class="input-group-text ">JSHIR</span>
+                            </div>
+                            <input type="number" onKeyPress="if (this.value.length == 14) return false;" autocomplete="off" min="14" asp-for="Pnfl" class="form-control" />
+                            <span asp-validation-for="Pnfl" class="text-danger"></span>
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span asp-for="Names" class="input-group-text ">Telefon</span>
+                            </div>
+                            <input asp-for="Phones" class="form-control"  autocomplete="off"/>
+                            <span asp-validation-for="Phones" class="text-danger"></span>
+                        </div>
+                        <div class="input-group mb-3">
+
+                            <div class="input-group-prepend">
+                                <span asp-for="Names" class="input-group-text ">Darajasi</span>
+                            </div>
+                            <select asp-for="Level_id" class="form-control" asp-items="ViewBag.Level_id"></select>
+
+                        </div>
+                        <div class="input-group mb-3">
+
+                            <div class="input-group-prepend">
+                                <span asp-for="Names" class="input-group-text ">Viloyat</span>
+                            </div>
+                            <select asp-for="Group_id" class="form-control" asp-items="ViewBag.Group_id"></select>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="btn-group  float-lg-right">
+                        <input class="btn btn-success" type="submit" value="Qo'shish" />
+                        &nbsp&nbsp
+                        <a type="button" class="btn btn-default" asp-action="Index">
+                            Bekor qilish
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+        <input type="hidden" id="imguser" asp-for="Photos" class="form-control" />
+</form>
+    <script>
+        window.onload = function () {
+            if (document.getElementById("imguser").value.length > 60) {
+                $('#canimg')
+                    .attr('src', document.getElementById("imguser").value)
+                    .height(250);
+            }
+        }
+        function encodeImageFileAsURL(element) {
+          
+            var file = element.files[0];
+            var reader = new FileReader();
+            reader.onloadend = function () {
+               
+                $('#canimg')
+                    .attr('src', reader.result)
+                    .height(250);
+                document.getElementById("imguser").value = reader.result; 
+            }
+            reader.readAsDataURL(file);
+        }
+    </script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+    </section>

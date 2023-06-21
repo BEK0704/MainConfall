@@ -1,0 +1,458 @@
+﻿<style>
+    #demo {
+        color: red;
+        text-align: center;
+        font-size: 40px;
+        margin-top: 0px;
+    }
+
+    .newimg {
+        opacity: 0.5;
+    }
+</style>
+
+<div class="card-body pb-0 pt-0">
+    <div id="timers" class="col-12 col-sm-12 col-md-12 pt-0"><p id="demo"></p></div>
+    <center>
+        <div class="row d-flex col-9 align-items-stretch">
+            <!-- Listeing -->
+            <div id="list123" class="col-12 col-sm-6 col-md-6 align-items-stretch">
+                <div class="card bg-light">
+                    <div class="card-header text-muted border-bottom-0">
+                    </div>
+                    <div class="card-body pt-0">
+                        <div class="row">
+                            <div class="col-7">
+                                <center style="padding-top: 25px;">
+                                    <h2 class="lead"><b></b></h2>
+                                    <p class="text-muted text-sm"><h2><b>Listening</b></h2></p>
+                                    <text style="color: grey"><h5>Ajratilgan vaqt: <b>00:00:00</b></h5></text>
+                                    <br>
+                                    <text><h5>Part 1</h5></text>
+                                    <text><h5>Part 2</h5></text>
+                                    <text><h5>Part 3</h5></text>
+                                    <text><h5>Part 4</h5></text>
+                                    <text><h5>Part 5</h5></text>
+                                    <text><h5>Part 6</h5></text>
+                                    
+                                    <br />
+                                </center>
+                            </div>
+                            <div class="col-5 text-center">
+
+                                @*<img id="imglist" onclick="listeningent()" style="cursor:pointer; width:100%" src="~/images/question/giphy.gif" class="img-circle img-fluid" />
+                                *@ <input id="imglist" type="image" onclick="listeningent()" style="cursor:pointer; width:100%; " src="~/images/question/giphy.gif" class="img-circle img-fluid" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button onclick="listeningent()" id="listbutton" class="btn btn-sm btn-secondary btn-block">
+                            <i class="fa fa-eye"></i> Listening
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Reading -->
+            <div id="read123" class="col-12 col-sm-6 col-md-6 align-items-stretch">
+                <div class="card bg-light">
+                    <div class="card-header text-muted border-bottom-0">
+                    </div>
+                    <div class="card-body pt-0">
+                        <div class="row">
+                            <div class="col-7">
+                                <center style="padding-top: 25px;">
+                                    <h2 class="lead"><b></b></h2>
+                                    <p class="text-muted text-sm"><h2><b>Reading</b></h2></p>
+                                    <text style="color: grey"><h5>Ajratilgan vaqt: <b>00:00:00</b></h5></text>
+                                    <br>
+                                    <text><h5>Part 1</h5></text>
+                                    <text><h5>Part 2</h5></text>
+                                    <text><h5>Part 3</h5></text>
+                                    <text><h5>Part 4</h5></text>
+                                    <text><h5>Part 5</h5></text>
+                                    <br />
+                                    <br />
+                                </center>
+                            </div>
+                            <div class="col-5 text-center">
+
+                                <input id="imgread" type="image" onclick="readingent()" src="~/images/question/111.gif" style="cursor:pointer" alt="" class="img-circle img-fluid" />
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button id="readbutton" onclick="readingent()" class="btn btn-sm btn-secondary btn-block">
+                            <i class="fa fa-eye"></i> Reading
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Writing -->
+            <div id="writing123" class="col-12 col-sm-6 col-md-6 align-items-stretch">
+                <div class="card bg-light">
+                    <div class="card-header text-muted border-bottom-0">
+                    </div>
+                    <div class="card-body pt-0">
+                        <div class="row">
+                            <div class="col-7">
+                                <center style="padding-top: 25px;">
+                                    <h2 class="lead"><b></b></h2>
+                                    <p class="text-muted text-sm"><h2><b>Writing</b></h2></p>
+                                    <text style="color: grey"><h5>Ajratilgan vaqt: <b>01:00:00</b></h5></text>
+                                </center>
+                                <div class="col-12" style="text-align:left; padding-left:15%">
+                                    <text><h5>Task 1</h5></text>
+                                    <text><h5>Task 2</h5></text>
+                                    <br/>
+                                </div>
+                            </div>
+                            <div class="col-5 text-center">
+
+                                <input type="image" id="imgwrite" onclick="writingent()" src="~/images/question/writing.gif" style="cursor:pointer; width:100%" class="col-12 img-circle img-fluid" />
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button onclick="writingent()" id="writebutton" class="btn btn-sm btn-secondary btn-block">
+                            <i class="fa fa-eye"></i>  Writing
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Speaking -->
+            <div id="speaking123" class="col-12 col-sm-6 col-md-6 align-items-stretch">
+                <div class="card bg-light">
+                    <div class="ribbon-wrapper">
+                        <div class="ribbon bg-success">
+                            Last
+                        </div>
+                    </div>
+                    <div class="card-header text-muted border-bottom-0">
+                    </div>
+                    <div class="card-body pt-0">
+                        <div class="row">
+                            <div class="col-7">
+                                <center style="padding-top: 25px;">
+                                    <h2 class="lead"><b></b></h2>
+                                    <p class="text-muted text-sm"><h2><b>Speaking</b></h2></p>
+                                    <text style="color: grey"><h5>Ajratilgan vaqt: <b>00:15:00</b></h5></text>
+                                    <div class="col-12" style="text-align:left; padding-left:15%">
+                                        <text><h5>Part 1</h5></text>
+                                        <text><h5>Part 2</h5></text>
+                                        <text><h5>Part 3</h5></text>
+                                    </div>
+                                </center>
+                            </div>
+                            <div class="col-5 text-center">
+
+                                <input type="image" id="imgspeaking" onclick="speakingent()" src="~/images/question/12.gif" style="cursor:pointer; width:100%" class="col-12 img-circle img-fluid" />
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button onclick="speakingent()" id="speakbutton" class="btn btn-sm btn-secondary btn-block">
+                            <i class="fa fa-eye"></i>  Speaking
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </center>
+</div>
+<div class="modal fade" id="exammod" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-warning">
+                <h5 class="modal-title" id="exampleModalLabel">Ogohlantirish!!!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Imtihonni boshlashga ruhsat berilmadi.
+            </div>
+
+        </div>
+    </div>
+</div>
+<script type="text/javascript" language="javascript">
+
+
+    // Set the date we're counting down to
+    var list = 0, write = 0, read = 0, speak = 0, act = 0, list2=0, read2=0, write2=0, speak2=0;
+    var countDownDatel;
+    var nowl = new Date().getTime();
+    function new12() {
+        $.ajax({
+            type: 'Get',
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            url: "/Listening/GetStart",
+
+            success: function (data) {
+                speak = data.speaking;
+                read = data.reading;
+              //  console.log(read);
+                list = data.listening;
+                write = data.writing;
+                countDownDatel = new Date(data.starttime).getTime();
+                nowl = new Date(data.starttime2).getTime();
+                var distance3 = countDownDatel - nowl;
+                var days3 = Math.floor(distance3 / (1000 * 60 * 60 * 24));
+                var hours3 = Math.floor((distance3 % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes3 = Math.floor((distance3 % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds3 = Math.floor((distance3 % (1000 * 60)) / 1000);
+
+
+                if (seconds3 < 0) {
+                    act = 1;
+                    if (list2 != 1 && list2 != 3) {
+                        document.getElementById('listbutton').className = "btn btn-sm btn-primary btn-block";
+                    }
+                    if (read2 != 1 && read2 != 3) {
+                        document.getElementById('readbutton').className = "btn btn-sm btn-primary btn-block";
+                    }
+                    if (write2 != 1 && write2 != 3) {
+                        document.getElementById('writebutton').className = "btn btn-sm btn-primary btn-block";
+                    }
+                    if (speak2 != 1 && speak2 != 3) {
+                        document.getElementById('speakbutton').className = "btn btn-sm btn-primary btn-block";
+                    }
+
+                } else {
+                    act = 0;
+                    if ((read != 2 || speak != 2 || list != 2 || write != 2) && distance3>0) {
+                        document.getElementById("demo").innerHTML = "Imtixon boshlanishiga: " + days3 + "d " + hours3 + "h "
+                            + minutes3 + "m " + seconds3 + "s ";
+                    }
+                    //speaking
+                    if (speak ==2) {
+                        document.getElementById('speakbutton').className = "btn btn-sm btn-primary btn-block";
+                    } else {
+                        document.getElementById('speakbutton').className = "btn btn-sm btn-secondary btn-block";
+                    }
+                    //reading
+                    if (read == 2) {
+                       // console.log("Kuydirgi");
+                        document.getElementById('readbutton').className = "btn btn-sm btn-primary btn-block";
+                    } else {
+                        document.getElementById('readbutton').className = "btn btn-sm btn-secondary btn-block";
+                    }
+                    //listening
+                    if (list == 2) {
+                        if (list2 == 1) {
+                            document.getElementById('listbutton').className = "btn btn-sm btn-success btn-block";
+                        } if (list2 == 3) {
+                            document.getElementById('listbutton').className = "btn btn-sm btn-danger btn-block";
+                        } else {
+                            document.getElementById('listbutton').className = "btn btn-sm btn-primary btn-block";
+                        }
+
+                    } else {
+                        document.getElementById('listbutton').className = "btn btn-sm btn-secondary btn-block";
+                    }
+                    //writing
+                    if (write == 2) {
+                        document.getElementById('writebutton').className = "btn btn-sm btn-primary btn-block";
+                    } else {
+                        document.getElementById('writebutton').className = "btn btn-sm btn-secondary btn-block";
+                    }
+                }
+                //console.log(act);
+            }
+        });
+    }
+    window.onload = function () {
+        new12();
+    }
+    var x = setInterval(function () {
+
+
+        // console.log(nowl);
+        // Find the distance between now and the count down date
+        var distance = countDownDatel - nowl;
+
+        // Time calculations for days, hours, minutes and seconds
+        @*var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Output the result in an element with id="demo"
+        if (seconds > 1) {
+            if (read != 2 || speak != 2 || list != 2 || write != 2) {
+            document.getElementById("demo").innerHTML = "Imtixon boshlanishiga: " + days + "d " + hours + "h "
+                    + minutes + "m " + seconds + "s ";
+            }
+
+        }*@
+        new12();
+        // If the count down is over, write some text
+        if (distance < 0 || read == 2 && speak == 2 && list == 2 && write==2) {
+            //clearInterval(x);
+            //$("#timers").empty();
+            $("#demo").empty();
+        }
+    }, 5000);
+    function listeningent() {
+        if (list == 2 || list == 1 && act == 1) {
+            self.location.replace('/Listening/InterListening');
+        }
+        else {
+            $("#exammod").modal('show');
+        }
+    }
+    function speakingent() {
+        if (speak == 2 || act == 1 && speak == 1) {
+            self.location.replace('/Speaking/EnterSpeaking');
+        }
+        else {
+            $("#exammod").modal('show');
+        }
+    }
+    function readingent() {
+        if (read == 2 || act == 1 && read == 1) {
+            self.location.replace('/Reading/Enterreading');
+        }
+        else {
+            $("#exammod").modal('show');
+        }
+    }
+    function writingent() {
+        if (write == 2 || act == 1 && write == 1) {
+            self.location.replace('/Writing/Enterwriting');
+        }
+        else {
+            $("#exammod").modal('show');
+        }
+    }
+    // Update the count down every 1 second
+
+</script>
+@if (User.IsInRole("Candidate"))
+{
+    <script>
+        window.onload = function () {
+
+            listening1();
+            readinging1();
+            writing1();
+            Speaking1();
+        }
+        function listening1() {
+
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                url: "/Listening/Finished",
+                success: function (data) {
+                    if (data.lets == false) {
+                        if (data.positions == 1) {
+                            document.getElementById("list123").disabled = true;
+                            document.getElementById('imglist').className = "img-circle img-fluid newimg";
+                            list2 = 1;
+                            document.getElementById('listbutton').className = "btn btn-sm btn-success btn-block";
+                            $('#list123 :input').attr('disabled', true);
+                        } else if (data.positions == 3) {
+                            document.getElementById("list123").disabled = true;
+                            document.getElementById('imglist').className = "img-circle img-fluid newimg";
+                            list2 = 3;
+                            document.getElementById('listbutton').className = "btn btn-sm btn-danger btn-block";
+                            $('#list123 :input').attr('disabled', true);
+
+                        }
+
+
+                    }
+                }
+            });
+        }
+        function readinging1() {
+
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                url: "/Reading/Finished",
+                success: function (data) {
+                    if (data.lets == false) {
+                        if (data.positions == 1) {
+                            document.getElementById("read123").disabled = true;
+                            document.getElementById('imgread').className = "img-circle img-fluid newimg";
+                            read2 = 1;
+                            document.getElementById('readbutton').className = "btn btn-sm btn-success btn-block";
+                            $('#read123 :input').attr('disabled', true);
+                        } else if (data.positions == 3) {
+                            document.getElementById("read123").disabled = true;
+                            document.getElementById('imgread').className = "img-circle img-fluid newimg";
+                            read2 = 3;
+                            document.getElementById('readbutton').className = "btn btn-sm btn-danger btn-block";
+                            $('#read123 :input').attr('disabled', true);
+
+                        }
+
+
+                    }
+                }
+            });
+        }
+        function writing1() {
+
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                url: "/Writing/Finished",
+                success: function (data) {
+                    if (data.lets == false) {
+                        if (data.positions == 1) {
+                            document.getElementById("writing123").disabled = true;
+                            document.getElementById('imgwrite').className = "img-circle img-fluid newimg";
+                            write2 = 1;
+                            document.getElementById('writebutton').className = "btn btn-sm btn-success btn-block";
+                            $('#writing123 :input').attr('disabled', true);
+                        } else if (data.positions == 3) {
+                            document.getElementById("writing123").disabled = true;
+                            document.getElementById('imgrimgwriteead').className = "img-circle img-fluid newimg";
+                            write2 = 3;
+                            document.getElementById('writebutton').className = "btn btn-sm btn-danger btn-block";
+                            $('#writing123 :input').attr('disabled', true);
+
+                        }
+
+
+                    }
+                }
+            });
+        }
+        function Speaking1() {
+
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                url: "/Speaking/Finished",
+                success: function (data) {
+                    if (data.lets == false) {
+                        if (data.positions == 1) {
+                            document.getElementById("speaking123").disabled = true;
+                            document.getElementById('imgspeaking').className = "img-circle img-fluid newimg";
+                            speak2 = 1;
+                            document.getElementById('speakbutton').className = "btn btn-sm btn-success btn-block";
+                            $('#speaking123 :input').attr('disabled', true);
+                        } else if (data.positions == 3) {
+                            document.getElementById("speaking123").disabled = true;
+                            document.getElementById('imgspeaking').className = "img-circle img-fluid newimg";
+                            speak2 = 3;
+                            document.getElementById('speakbutton').className = "btn btn-sm btn-danger btn-block";
+                            $('#speaking123 :input').attr('disabled', true);
+
+                        }
+
+
+                    }
+                }
+            });
+        }
+    </script>
+}

@@ -1,0 +1,61 @@
+﻿@model IEnumerable<MainConf.Models.Main.Log_file>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="card " style="padding-top:1%">
+    <div class="card-header bg-info">
+     
+    </div>
+    <div class="card-body">
+        <div style="overflow-x:auto;">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Foydalanuvchi Pnfl
+                        </th>
+                        <th>
+                            Ip addres
+                        </th>
+                        <th>
+                            Mac address 
+                        </th>
+                        <th>
+                            Holat
+                        </th>
+                        <th>
+                            Vaqti
+                        </th>
+                      
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.User_name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Ip_address)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Mac_address)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Actions)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Created_time)
+                            </td>
+                          
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+

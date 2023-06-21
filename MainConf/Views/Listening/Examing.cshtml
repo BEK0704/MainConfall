@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+@{
+    Layout = null;
+}
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    
+    
+    <link href="~/css/OverlayScrollbars.min.css" rel="stylesheet" />
+    <style>
+        video {
+            box-sizing: border-box;
+            border-radius: 5px;
+            padding: 0;
+            box-shadow: rgba(156, 172, 172, 0.2) 0px 2px 2px, rgba(156, 172, 172, 0.2) 0px 4px 4px, rgba(156, 172, 172, 0.2) 0px 8px 8px, rgba(156, 172, 172, 0.2) 0px 16px 16px, rgba(156, 172, 172, 0.2) 0px 32px 32px, rgba(156, 172, 172, 0.2) 0px 64px 64px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+
+    <header class="wrapper">
+        <nav class="header navbar navbar-expand navbar-light">
+            <!-- Left navbar links -->
+
+            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <button onclick="ending()" class="btn btn-lg  btn-outline-primary" style="margin-top:2%;">Yakunlash</button>
+
+            </div>
+        </nav>
+    </header>
+    <div class="wrapper">
+
+        <div class="row col-md-12 col-12" style="margin-left:2%; margin-right:2%">
+
+            <div class=" col-7">
+                <video id="remoteVideo" autoplay controls></video>
+            </div>
+            <div style="margin-left:1%;" class="col-4 row">
+                <div class="col-12 row">
+                </div>
+            </div>
+            <div style="display:none">
+                <video id="localVideo" autoplay muted></video>
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+
+    <script>
+        function switchmicrophone() {
+
+            if (localVideo.srcObject.getAudioTracks()[0].enabled) {
+                document.getElementById("idmicro").src = "/img/83.png";
+                localVideo.srcObject.getAudioTracks()[0].enabled = false;
+
+
+            } else {
+                document.getElementById("idmicro").src = "/img/82.png";
+                localVideo.srcObject.getAudioTracks()[0].enabled = true;
+
+            }
+        }
+        function switchvideo() {
+            if (localVideo.srcObject.getVideoTracks()[0].enabled) {
+                document.getElementById("idcamer").src = "/img/85.png";
+                localVideo.srcObject.getVideoTracks()[0].enabled = false;
+
+
+            } else {
+                document.getElementById("idcamer").src = "/img/87.png";
+                localVideo.srcObject.getVideoTracks()[0].enabled = true;
+
+            }
+        }
+        function ending() {
+            $.ajax({
+                type: 'GET',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                url: "/Listening/Endedview",
+                success: function (data) {
+                    if (data.lets == true) {
+                        self.location.replace('/Home/Index');
+                    }
+                }
+            });
+        }
+
+
+    </script>
+    <script>
+
+    </script>
+    <script src="~/js/jquery-1.11.2.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <script src="~/js/RecordRTC.js"></script>
+    
+    <script src="~/js/Scriptlist.js"></script>
+    <script src="~/js/adapter-latest.js"></script>
+    <script src="~/js/jquery.dataTables.js"></script>
+    <script src="~/js/adminlte.js"></script>
+    <script src="~/js/sweetalert2/sweetalert2.js"></script>
+
+
+</body>
+</html>

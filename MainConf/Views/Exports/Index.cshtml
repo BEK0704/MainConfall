@@ -1,0 +1,106 @@
+﻿@using MainConf.TagHelpers;
+
+@model ExpertViewModel
+@addTagHelper *, MainConf
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="card ">
+    <div class="card-header">
+        
+            <form asp-controller="Exports" asp-action="Index" class="row">
+                <div class="col-sm-3">
+                    <a class="btn btn-info" asp-action="Create">Ekspertni qo'shish!</a>
+                </div>
+                <div class="col-sm-3" >
+                    <a class="btn btn-info" asp-controller="Candidates" asp-action="InsertExport">Expertlarni qo'shish!</a>
+                </div>
+                <div class="col-sm-2"><select class="form-control" name="levels1" asp-items="Model.FilterExpert.Levels1"></select></div>
+                <div class="col-sm-2"><input name="name" type="number" placeholder="JSHIR" value="@Model.FilterExpert.SelectedName" class="form-control" onKeyPress="if (this.value.length == 14) return false;" autocomplete="off" min="14" /></div>
+                <div class="col-sm-2"><input type="submit" value="Qidiruv" class="btn btn-info" /></div>
+            </form>
+       
+    </div>
+    <div class="card-body">
+        <div style="overflow-x:auto;">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            <a asp-action="Index"
+                               asp-route-sortOrder="@(Model.SortingExpert.FioSort)"
+                               asp-route-name="@(Model.FilterExpert.SelectedName)"
+                               asp-route-levels1="@(Model.FilterExpert.SelectedLevel)">
+                                Ekspert FIO
+                            </a>
+                        </th>
+                        <th>
+                            <a asp-action="Index"
+                               asp-route-sortOrder="@(Model.SortingExpert.PnflSort)"
+                               asp-route-name="@(Model.FilterExpert.SelectedName)"
+                               asp-route-levels1="@(Model.FilterExpert.SelectedLevel)">
+                                JSHIR
+                            </a>
+                        </th>
+                        <th>
+                            <a asp-action="Index"
+                               asp-route-sortOrder="@(Model.SortingExpert.LanguageSort)"
+                               asp-route-name="@(Model.FilterExpert.SelectedName)"
+                               asp-route-levels1="@(Model.FilterExpert.SelectedLevel)">
+                                Tili
+                            </a>
+                        </th>
+                        <th>
+                            Darajasi
+                        </th>
+                        <th>
+                            Batafsil
+                        </th>
+                        <th>
+                            O'zgartirish
+                        </th>
+                        <th>
+                            Card
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.ExpertViewstab)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Exp_fio)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Pnfl)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Lan)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Lev)
+                            </td>
+                            <td>
+                                <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.Exp_id">Batafsil</a>
+                            </td>
+
+                            <td>
+                                <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@item.Exp_id">O'zgartrish</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-outline-secondary" asp-action="Card" asp-route-Pnfl="@item.Pnfl">Bejik</a>
+                            </td>
+                        </tr>
+                    }
+                    <tr><td><b>Jami soni</b></td><td><b>@Html.DisplayFor(Model => Model.countall)</b></td><td></td><td></td> <td></td> <td></td> <td></td></tr>
+                </tbody>
+            </table>
+        </div>
+        <page-link page-model="Model.PageViewModel" page-action="Index"
+                   page-url-name="@(Model.FilterExpert.SelectedName)"
+                   page-url-levels1="@(Model.FilterExpert.SelectedLevel)"
+                   page-url-sortorder="@(Model.SortingExpert.current)"></page-link>
+    </div>
+    
+</div>
+

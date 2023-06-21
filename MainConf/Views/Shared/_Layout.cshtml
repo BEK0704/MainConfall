@@ -1,0 +1,339 @@
+﻿<!DOCTYPE html>
+<html lang="en" translate="no">
+
+<head>
+    <meta name="google" content="notranslate" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link href="~/fontawesome-free-5.15.2-web/css/all.css" rel="stylesheet" />
+    <link href="~/css/adminlte.min.css" rel="stylesheet" />
+    <link href="~/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/dataTables.bootstrap4.css" rel="stylesheet" />
+    <link href="~/css/OverlayScrollbars.min.css" rel="stylesheet" />
+    <link href="~/css/select2.css" rel="stylesheet" />
+    <link href="~/css/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+    <header class="wrapper">
+        
+
+            @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
+            {
+                <nav class="main-header navbar navbar-expand navbar-light">
+                    <!-- Left navbar links -->
+
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" data-widget="pushmenu" href="#"><i class="navbar-toggler-icon"></i></a>
+                        </li>
+                    </ul>
+
+                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+
+                        <partial name="_LoginPartial" />
+                    </div>
+                </nav>
+
+                <aside class="main-sidebar bg-info  elevation-4 sidebar-dark-blue">
+                    <div class="sidebar ">
+                        <a asp-controller="Home" asp-action="Privacy" class="brand-link" style="width:200px">
+                            <div class="col d-flex justify-content-center"><i class="fas fa-users-cog 4x"></i><h4 class="font-weight-bold" style="color:white;">Admin</h4></div>
+                        </a>
+
+                        <!-- Sidebar Menu -->
+                        <nav class="mt-2 ">
+                            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <li class="nav-item has-treeview">
+                                        <a class="nav-link text-white" href="#">
+                                            <img class="nav-icon" src="~/images/14.png" />
+                                            <p>Live</p>
+                                        </a>
+                                        <ul class="nav nav-treeview">
+                                            @*<li class="nav-item">
+                        <a class="nav-link text-black" asp-controller="Exports" asp-action="Started">
+                            <img class="nav-icon" src="~/images/9.png" />
+                            <p>Boshlangan</p>
+                        </a>
+                    </li>*@
+                                            <li class="nav-item ">
+                                                <a class="nav-link text-black" asp-controller="Exports" asp-action="Waited">
+                                                    <img class="nav-icon" src="~/images/10.png" />
+                                                    <p>Online</p>
+                                                </a>
+                                            </li>
+                                         @*   <li class="nav-item ">
+                                                <a class="nav-link text-black" asp-controller="Exports" asp-action="SecondCount">
+                                                    <img class="nav-icon" src="~/images/11.png" />
+                                                    <p>2-ekspertlar</p>
+                                                </a>
+                                            </li>
+                                   
+                                            <li class="nav-item ">
+                                                <a class="nav-link text-black" asp-controller="Exports" asp-action="ThirdCounts">
+                                                    <img class="nav-icon" src="~/images/22.png" />
+                                                    <p>3-ekspertlar</p>
+                                                </a>
+                                            </li>*@
+                                            @*    <li class="nav-item ">
+                        <a class="nav-link text-black" asp-controller="Exports" asp-action="Notchecked3">
+                            <img class="nav-icon" src="~/images/23.png" />
+                            <p>Tekshirilmagan 3 </p>
+                        </a>
+                    </li>*@
+                                        </ul>
+                                    </li>
+
+                                 @*   <li class="nav-item has-treeview">
+                                        <a class="nav-link text-white" href="#">
+                                            <img class="nav-icon" src="~/images/54.png" />
+                                            <p>Tekshirilmagan</p>
+                                        </a>
+                                        <ul class="nav nav-treeview">
+                                            <li class="nav-item">
+                                                <a class="nav-link text-black" asp-controller="Exports" asp-action="Notchecked2">
+                                                    <img class="nav-icon" src="~/images/21.png" />
+                                                    <p>2-Ekspert</p>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item ">
+                                                <a class="nav-link text-black" asp-controller="Exports" asp-action="Notchecked3">
+                                                    <img class="nav-icon" src="~/images/23.png" />
+                                                    <p>3-Ekspert</p>
+                                                </a>
+                                            </li>
+
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item has-treeview">
+                                        <a class="nav-link text-white" href="#">
+                                            <img class="nav-icon" src="~/images/41.png" />
+                                            <p>Savollar</p>
+                                        </a>
+                                        <ul class="nav nav-treeview">
+                                            <li class="nav-item">
+                                                <a class="nav-link text-black" asp-controller="Part1" asp-action="Index">
+                                                    <img class="nav-icon" src="~/images/42.png" />
+                                                    <p>1-Savol</p>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item ">
+                                                <a class="nav-link text-black" asp-controller="Part2" asp-action="Index">
+                                                    <img class="nav-icon" src="~/images/43.png" />
+                                                    <p>2-Savol</p>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item ">
+                                                <a class="nav-link text-black" asp-controller="Part3" asp-action="Index">
+                                                    <img class="nav-icon" src="~/images/44.png" />
+                                                    <p>3-savol</p>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>*@
+                                }
+                             @*   <li class="nav-item">
+                                    <a class="nav-link text-white" asp-controller="Candidates" asp-action="Index">
+                                        <img class="nav-icon" src="~/images/15.png" />
+                                        <p>Nomzodlar</p>
+                                    </a>
+
+                                </li>*@
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" asp-controller="Home" asp-action="Ipaddress">
+                                        <img class="nav-icon" src="~/images/icons/29.png" />
+                                        <p>Ip manzillar</p>
+                                    </a>
+
+                                </li>
+                                
+                                @if (User.IsInRole("Admin"))
+                                {
+                                  @*  <li class="nav-item has-treeview">
+                                        <a class="nav-link text-white" href="#">
+                                            <img class="nav-icon" src="~/images/53.png" />
+                                            <p>Ekspert</p>
+                                        </a>
+                                        <ul class="nav nav-treeview">
+                                            <li class="nav-item">
+                                                <a class="nav-link text-black" asp-controller="Exports" asp-action="Index">
+                                                    <img class="nav-icon" src="~/images/17.png" />
+                                                    <p>1-2-Ekspertlar</p>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item ">
+                                                <a class="nav-link text-black" asp-controller="Examiners" asp-action="Index">
+                                                    <img class="nav-icon" src="~/images/18.png" />
+                                                    <p>3-Ekspertlar</p>
+                                                </a>
+                                            </li>
+
+                                        </ul>
+                                    </li>*@
+
+                                    @* <li class="nav-item">
+                <a class="nav-link text-white" asp-controller="User" asp-action="Index">
+                    <img class="nav-icon" src="~/images/20.png" />
+                    <p>Foydalanuvchilar</p>
+                </a>
+            </li>*@
+                                    @*   <li class="nav-item">
+                <a class="nav-link text-white" asp-controller="Exports" asp-action="Index">
+                    <img class="nav-icon" src="~/images/17.png" />
+                    <p>Ekspertlar</p>
+                </a>
+            </li>
+
+            <li class="nav-item ">
+                <a class="nav-link text-white" asp-controller="Examiners" asp-action="Index">
+                    <img class="nav-icon" src="~/images/18.png" />
+                    <p>3-Ekspertlar</p>
+                </a>
+            </li>*@
+                                    <li class="nav-item has-treeview">
+                                        <a class="nav-link text-white" href="#">
+                                            <img class="nav-icon" src="~/images/24.png" />
+                                            <p>Hisobot</p>
+                                        </a>
+                                        <ul class="nav nav-treeview">
+                                            <li class="nav-item">
+                                                <a class="nav-link text-black" asp-controller="Exports" asp-action="Report">
+                                                    <img class="nav-icon" src="~/images/51.png" />
+                                                    <p>Imtihonga qatnashganlar</p>
+                                                </a>
+                                            </li>
+                                         @*   <li class="nav-item ">
+                                                <a class="nav-link text-black" asp-controller="Home" asp-action="Report">
+                                                    <img class="nav-icon" src="~/images/19.png" />
+                                                    <p>Natijalar</p>
+                                                </a>
+                                            </li>*@
+
+                                        </ul>
+                                    </li>
+                                    @*
+            <li class="nav-item">
+                <a class="nav-link text-white" asp-controller="Exports" asp-action="Report">
+                    <img class="nav-icon" src="~/images/24.png" />
+                    <p>Hisobot</p>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Report">
+                    <img class="nav-icon" src="~/images/19.png" />
+                    <p>Natijalar</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" asp-area="" asp-controller="Roles" asp-action="Index">
+                    <img class="nav-icon" src="~/images/87.png" />
+                    <p>Rollar</p>
+                </a>
+            </li>*@
+                                   @* <li class="nav-item has-treeview">
+                                        <a class="nav-link text-white" href="#">
+                                            <img class="nav-icon" src="~/images/52.png" />
+                                            <p>Sozlanmalar</p>
+                                        </a>
+                                        <ul class="nav nav-treeview">
+                                            <li class="nav-item">
+                                                <a class="nav-link text-black" asp-controller="Home" asp-action="Konfigure">
+                                                    <img class="nav-icon" src="~/images/38.png" />
+                                                    <p>Konfiguratsiya</p>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link text-black" asp-controller="Exports" asp-action="Face">
+                                                    <img class="nav-icon" src="~/images/icons/20.png" />
+                                                    <p>Face Control</p>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item ">
+                                                <a class="nav-link text-black" asp-controller="Exports" asp-action="Logs">
+                                                    <img class="nav-icon" src="~/images/26.png" />
+                                                    <p>Loglar</p>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item ">
+                                                <a class="nav-link text-black" asp-controller="Examiners" asp-action="ErrorLog">
+                                                    <img class="nav-icon" src="~/images/27.png" />
+                                                    <p>Xatoliklar</p>
+                                                </a>
+                                            </li>
+
+                                        </ul>
+                                    </li>*@
+                                    @*   <li class="nav-item">
+                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Konfigure">
+                    <img class="nav-icon" src="~/images/38.png" />
+                    <p>Konfiguratsiya</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" asp-area="" asp-controller="Exports" asp-action="Logs">
+                    <img class="nav-icon" src="~/images/26.png" />
+                    <p>Loglar</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" asp-area="" asp-controller="Examiners" asp-action="ErrorLog">
+                    <img class="nav-icon" src="~/images/27.png" />
+                    <p>Xatoliklar</p>
+                </a>
+            </li>*@
+                                }
+                            </ul>
+
+                        </nav>
+                        <!-- /.sidebar-menu -->
+                    </div>
+                    <!-- /.sidebar -->
+                </aside>
+            }
+            else
+            {
+    <nav class="navbar navbar-expand text-light" style="        background-color: #E7EAED;">
+       <div class="col-1"></div> <div><a class="btn btn-light" asp-area="" asp-controller="Home" asp-action="Privacy"><i class="bi bi-house-door"></i></a></div>
+        <div class=" navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse ">
+            <partial name="_LoginPartial" />
+        </div>
+    </nav>
+
+            }
+    </header>
+    @if (User.IsInRole("Admin") || User.IsInRole("Manager")) { 
+    <div class="content-wrapper px-6">
+        <section class="content">
+            <div class="container-fluid">
+
+                @RenderBody()
+            </div>
+        </section>
+    </div>} else{
+    <div class="wrapper" style="padding-left:5%; padding-right:5%; padding-top:2%;">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    }
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/jquery.dataTables.js"></script>
+    <script src="~/js/adminlte.js"></script>
+    <script src="~/js/dataTables.bootstrap4.js"></script>
+    <script src="~/js/sweetalert2/sweetalert2.js"></script>
+    <script src="~/js/select2/select2.js"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

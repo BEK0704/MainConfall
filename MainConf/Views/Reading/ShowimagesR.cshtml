@@ -1,0 +1,386 @@
+﻿@model MainConf.Models.Reading.Logimages;
+<!DOCTYPE html>
+<html lang="en">
+@{
+    Layout = null;
+
+}
+<head>
+    <link href="~/css/font-awesome.min.css" rel="stylesheet" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <style>
+        video {
+            box-sizing: border-box;
+            border-radius: 5px;
+            padding: 0;
+            box-shadow: rgba(156, 172, 172, 0.2) 0px 2px 2px, rgba(156, 172, 172, 0.2) 0px 4px 4px, rgba(156, 172, 172, 0.2) 0px 8px 8px, rgba(156, 172, 172, 0.2) 0px 16px 16px, rgba(156, 172, 172, 0.2) 0px 32px 32px, rgba(156, 172, 172, 0.2) 0px 64px 64px;
+            width: 100%;
+        }
+    </style>
+    @*chat*@
+    <style>
+ @*       body{
+    background-color: #f4f7f6;
+    margin-top:20px;
+}*@
+.card {
+    background: #fff;
+    transition: .5s;
+    border: 0;
+    margin-bottom: 30px;
+    border-radius: .55rem;
+    position: relative;
+    width: 100%;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
+}
+.chat-app .people-list {
+    width: 280px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 20px;
+    z-index: 7
+}
+
+
+
+.people-list {
+    -moz-transition: .5s;
+    -o-transition: .5s;
+    -webkit-transition: .5s;
+    transition: .5s
+}
+
+.people-list .chat-list li {
+    padding: 10px 15px;
+    list-style: none;
+    border-radius: 3px
+}
+
+.people-list .chat-list li:hover {
+    background: #efefef;
+    cursor: pointer
+}
+
+.people-list .chat-list li.active {
+    background: #efefef
+}
+
+.people-list .chat-list li .name {
+    font-size: 15px
+}
+
+.people-list .chat-list img {
+    width: 45px;
+    border-radius: 50%
+}
+
+.people-list img {
+    float: left;
+    border-radius: 50%
+}
+
+.people-list .about {
+    float: left;
+    padding-left: 8px
+}
+
+.people-list .status {
+    color: #999;
+    font-size: 13px
+}
+
+.chat .chat-header {
+    padding: 15px 20px;
+    border-bottom: 2px solid #f4f7f6
+}
+
+.chat .chat-header img {
+    float: left;
+    border-radius: 40px;
+    width: 40px
+}
+
+.chat .chat-header .chat-about {
+    float: left;
+    padding-left: 10px
+}
+
+.chat .chat-history {
+    padding: 20px;
+    border-bottom: 2px solid #fff
+}
+
+.chat .chat-history ul {
+    padding: 0
+}
+
+.chat .chat-history ul li {
+    list-style: none;
+    margin-bottom: 30px
+}
+
+.chat .chat-history ul li:last-child {
+    margin-bottom: 0px
+}
+
+.chat .chat-history .message-data {
+    margin-bottom: 15px
+}
+
+.chat .chat-history .message-data img {
+    border-radius: 40px;
+    width: 40px
+}
+
+.chat .chat-history .message-data-time {
+    color: #434651;
+    padding-left: 6px
+}
+
+.chat .chat-history .message {
+    color: #444;
+    padding: 18px 20px;
+    line-height: 26px;
+    font-size: 16px;
+    border-radius: 7px;
+    display: inline-block;
+    position: relative
+}
+
+.chat .chat-history .message:after {
+    bottom: 100%;
+    left: 7%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-bottom-color: #fff;
+    border-width: 10px;
+    margin-left: -10px
+}
+
+.chat .chat-history .my-message {
+    background: #efefef
+}
+
+.chat .chat-history .my-message:after {
+    bottom: 100%;
+    left: 30px;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-bottom-color: #efefef;
+    border-width: 10px;
+    margin-left: -10px
+}
+
+.chat .chat-history .other-message {
+    background: #e8f1f3;
+    text-align: right
+}
+
+.chat .chat-history .other-message:after {
+    border-bottom-color: #e8f1f3;
+    left: 93%
+}
+
+.chat .chat-message {
+    padding: 20px
+}
+
+.online,
+.offline,
+.me {
+    margin-right: 2px;
+    font-size: 8px;
+    vertical-align: middle
+}
+
+.online {
+    color: #86c541
+}
+
+.offline {
+    color: #e47297
+}
+
+.me {
+    color: #1d8ecd
+}
+
+.float-right {
+    float: right
+}
+
+.clearfix:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0
+}
+
+
+
+
+
+
+
+
+    </style>
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+    <header class="wrapper">
+        <nav class="navbar navbar-expand " style=" background-color: #E8EAED; border-color: black; padding-left: 10%;">
+            <ul class="navbar-nav flex-grow-1" style="min-width:550px;">
+                <li class="nav-item" style="padding-right:5%;">
+                    <a type="button" class="btn  btn-light " asp-controller="Home" asp-action="Index">
+                        Ortga
+                    </a>
+                </li>
+                <li id="nameofuser" class="nav-item" style="font-size:20px;  color:black; ">
+                    @Html.DisplayFor(model => model.Fio)
+                </li>
+            </ul>
+            <center class="col-2"><div id="Parts">O'qib tushinish bo'limi</div></center>
+            <div class=" navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse " style="padding-right:3%">
+                @Html.DisplayFor(model => model.Pnfl)
+            </div>
+        </nav>
+    </header>
+    <div class="wrapper">
+        <div class="card text-center">
+            <h5 class="card-header">Bo'limlarga o'tish</h5>
+            <div class="card-body row " style="align-items:center">
+                
+               @if (Model.Photo.Part1.Length > 20)
+                {
+                    <div class="card text-center col-2">
+                        <div class="card-header alert-info">
+                            Part 1
+                        </div>
+                        <div class="card-body">
+                            <img src="@Model.Photo.Part1" style="width:100%" />
+                        </div>
+                        <div class="card-footer alert-info">
+                            @Html.DisplayFor(model => model.Dateing)
+                        </div>
+                    </div>
+                }
+                @if (Model.Photo.Part2.Length > 20)
+                {
+                    <div class="card text-center col-2">
+                        <div class="card-header alert-info">
+                            Part 2
+                        </div>
+                        <div class="card-body">
+                            <img src="@Model.Photo.Part2" style="width:100%" />
+                        </div>
+                        <div class="card-footer alert-info">
+                            @Html.DisplayFor(model => model.Dateing)
+                        </div>
+                    </div>
+                }
+                @if (Model.Photo.Part3.Length > 20)
+                {
+                    <div class="card text-center col-2">
+                        <div class="card-header alert-info">
+                            Part 3
+                        </div>
+                        <div class="card-body">
+                            <img src="@Model.Photo.Part3" style="width:100%" />
+                        </div>
+                        <div class="card-footer alert-info">
+                            @Html.DisplayFor(model => model.Dateing)
+                        </div>
+                    </div>
+                }
+                @if (Model.Photo.Part4.Length > 20)
+                {
+                    <div class="card text-center col-2">
+                        <div class="card-header alert-info">
+                            Part 4
+                        </div>
+                        <div class="card-body">
+                            <img src="@Model.Photo.Part4" style="width:100%" />
+                        </div>
+                        <div class="card-footer alert-info">
+                            @Html.DisplayFor(model => model.Dateing)
+                        </div>
+                    </div>
+                }
+                @if (Model.Photo.Part5.Length > 20)
+                {
+                    <div class="card text-center col-2">
+                        <div class="card-header alert-info">
+                            Part 5
+                        </div>
+                        <div class="card-body">
+                            <img src="@Model.Photo.Part5" style="width:100%" />
+                        </div>
+                        <div class="card-footer alert-info">
+                            @Html.DisplayFor(model => model.Dateing)
+                        </div>
+                    </div>
+                }
+              
+            </div>
+        </div>
+
+        <div class="card text-center" style="margin-top:1%">
+            <h5 class="card-header">Qoida buzarliklar</h5>
+            <div class="card-body row">
+                @foreach (var item in Model.Controllings)
+                {
+                    if (item.Photoer.Length > 20)
+                    {
+                        <div class="card text-center col-2">
+                            @if (item.Typeerror == 1)
+                            {
+                                <div class="card-header alert-danger">
+                                    Suhbatlashildi
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="card-header alert-warning">
+                                    Yon atrofga qaraldi
+                                </div>
+                            }
+
+                            <div class="card-body">
+                                <img src="@item.Photoer" style="width:100%" />
+                            </div>
+                            <div class="card-footer alert-info">
+                                @item.Errortime
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+
+    </div>
+
+    <input asp-for="Pnfl" hidden class="form-control" />
+    <script></script>
+    <script src="~/js/jquery-1.11.2.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+
+</body>
+</html>

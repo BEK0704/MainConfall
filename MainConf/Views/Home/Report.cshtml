@@ -1,0 +1,63 @@
+﻿@model MainConf.Models.Seconds.DownloadExcel
+<form asp-controller="Home" asp-action="Export" style="margin-top:1%">
+    <div  class="card ">
+        <div class="card-header bg-info">
+            <h3>Yakuniy natijalar!</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-2">
+                    <input asp-for="In_date1" id="firsttime" type="date" class="form-control" />
+                </div>
+                <div class="col-sm-2">
+                    <input asp-for="In_date2" id="secondtime" type="date" class="form-control" />
+                </div>
+                <div class="col-sm-3">
+                    <select asp-for="Location" id="lanid" asp-items="ViewBag.Language_id" class="form-control "></select>
+                </div>
+                <div class="col-sm-3">
+                    <select asp-for="Level" id="lanid" asp-items="ViewBag.Location_id" class="form-control "></select>
+                </div>
+                <div class="col-sm-1">
+                    <button  class="btn btn-primary btn">Natijalar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+<form asp-controller="Home" asp-action="Exportfull" style="margin-top:1%">
+    <div class="card ">
+        <div class="card-header bg-info">
+            <h3>To'liq yakuniy natijalar!</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-2">
+                    <input asp-for="In_date1" id="firsttime1" type="date" class="form-control" />
+                </div>
+                <div class="col-sm-2">
+                    <input asp-for="In_date2" id="secondtime1" type="date" class="form-control" />
+                </div>
+                <div class="col-sm-3">
+                    <select asp-for="Location" id="lanid" asp-items="ViewBag.Language_id" class="form-control "></select>
+                </div>
+                <div class="col-sm-3">
+                    <select asp-for="Level" id="lanid" asp-items="ViewBag.Location_id" class="form-control "></select>
+                </div>
+                <div class="col-sm-1">
+                    <button class="btn btn-primary btn">Natijalar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+<script>
+    window.onload = function () {
+        document.getElementById('firsttime').valueAsDate = new Date();
+        document.getElementById('secondtime').valueAsDate = new Date();
+        document.getElementById('firsttime1').valueAsDate = new Date();
+        document.getElementById('secondtime1').valueAsDate = new Date();
+    };
+</script>

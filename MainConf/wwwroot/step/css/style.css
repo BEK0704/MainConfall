@@ -1,0 +1,47 @@
+
+body {
+    background-color: #eee;
+    font-family: "Poppins", sans-serif;
+    font-weight: 300
+}
+
+
+
+.progresses {
+    display: flex;
+    align-items: center
+}
+
+.line_after {
+    width: 180px;
+    height: 8px;
+    background: #f7a266;
+}
+.line_before {
+    width: 180px;
+    height: 8px;
+    background: #63d19e;
+}
+
+.steps_after {
+    display: flex;
+    background-color: #f7a266;
+    color: #fff;
+    font-size: 18px;
+    width: 60px;
+    height: 60px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%
+}
+.steps_before {
+    display: flex;
+    background-color: #63d19e;
+    color: #fff;
+    font-size: 18px;
+    width: 60px;
+    height: 60px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%
+}

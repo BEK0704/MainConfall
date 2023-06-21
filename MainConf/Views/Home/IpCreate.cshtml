@@ -1,0 +1,62 @@
+﻿@model MainConf.Models.Main.Ipconfig
+
+@{
+    ViewData["Title"] = "Yaratish";
+}
+<script src="~/editor/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+
+
+<section class="content">
+    <form method="post" asp-action="IpCreate">
+        <div class="card card-info" style="margin-top:1%;">
+            <div class="card-header">Yangi savol qo'shish!</div>
+            <div class="card-body">
+                <div class="row">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text ">Kompyuter nomi</span>
+                        </div>
+                        <input asp-for="Names" class="form-control" />
+                        <span asp-validation-for="Names" class="text-danger"></span>
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text ">Ip manzil</span>
+                        </div>
+                        <input type="text" name="Ipaddress" class="form-input ip_address" id="ipv4" placeholder="xxx.xxx.xxx.xxx" />
+                        <span asp-validation-for="Ipaddress" class="text-danger"></span>
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text ">Hududni tanlang</span>
+                        </div>
+                        <select asp-for="Regions" class="form-control" asp-items="ViewBag.Region_id"></select>
+                        <span asp-validation-for="Regions" class="text-danger"></span>
+                    </div>
+                    <div class="input-group mb-3" style="margin-top:1%">
+                        <div class="btn-group  float-lg-right">
+                            <input class="btn btn-success"  type="submit" value="Qo'shish" />
+                            &nbsp&nbsp
+                            <a type="button" class="btn btn-default" asp-controller="Home" asp-action="Ipaddress">
+                                Bekor qilish
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</section>
+<script src="~/js/jquery.mask.js"></script>
+<script src="~/js/jquery-1.11.2.min.js"></script>
+<script src="~/js/jquery.inputmask.bundle.js"></script>
+<script>
+    var ipv4_address = $('#ipv4');
+    ipv4_address.inputmask({
+        alias: "ip",
+        greedy: false //The initial mask shown will be "" instead of "-____".
+    });
+</script>

@@ -1,0 +1,180 @@
+﻿@using MainConf.TagHelpers;
+
+@model CandidatesViewModel
+@addTagHelper *, MainConf
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="card ">
+    <div class="card-header">
+        
+            <form asp-controller="Candidates" asp-action="Index" class="row">
+                @if (User.IsInRole("Admin"))
+                {<div class="col-sm-2">
+                        <a class="btn btn-info" asp-action="Create">Nomzodni qo'shish!</a>
+                    </div>
+                <div class="col-sm-2">
+                    <a class="btn btn-info" asp-action="Insertlist">Nomzodlarni qo'shish!</a>
+                </div>
+                <div class="col-sm-2">
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#staticBackdrop">
+                        Nomzodlarni o'chirish
+                    </button>
+                </div>}
+               
+                    <div class="col-sm-1"><select class="form-control" name="location1" asp-items="Model.FilterCandidetes.Locations1"></select></div>
+                    <div class="col-sm-1"><select class="form-control" name="levels1" asp-items="Model.FilterCandidetes.Levels1"></select></div>
+                    <div class="col-sm-2"><input name="name" type="number" placeholder="JSHIR" value="@Model.FilterCandidetes.SelectedName" class="form-control" onKeyPress="if (this.value.length == 14) return false;" autocomplete="off" min="14"/></div>
+                    <div class="col-sm-1"><input type="submit" value="Qidiruv" class="btn btn-info" /></div>
+                
+
+            </form>
+        
+    </div>
+    <div class="card-body">
+        <div style="overflow-x:auto;">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            <a asp-action="Index"
+                               asp-route-sortOrder="@(Model.SortingCandidetes.FioSort)"
+                               asp-route-name="@(Model.FilterCandidetes.SelectedName)"
+                               asp-route-location1="@(Model.FilterCandidetes.SelectedLocation)"
+                               asp-route-levels1="@(Model.FilterCandidetes.SelectedLevel)">
+                                Nomzod FIO
+                            </a>
+                        </th>
+                        <th>
+                            <a asp-action="Index"
+                               asp-route-sortOrder="@(Model.SortingCandidetes.PnflSort)"
+                               asp-route-name="@(Model.FilterCandidetes.SelectedName)"
+                               asp-route-location1="@(Model.FilterCandidetes.SelectedLocation)"
+                               asp-route-levels1="@(Model.FilterCandidetes.SelectedLevel)">
+                                JSHIR
+                            </a>
+                        </th>
+                        <th>
+                            <a asp-action="Index"
+                               asp-route-sortOrder="@(Model.SortingCandidetes.LanguageSort)"
+                               asp-route-name="@(Model.FilterCandidetes.SelectedName)"
+                               asp-route-location1="@(Model.FilterCandidetes.SelectedLocation)"
+                               asp-route-levels1="@(Model.FilterCandidetes.SelectedLevel)">
+                                Tili
+                            </a>
+                        </th>
+                        <th>
+                            Darajasi
+                        </th>
+                        <th>
+                            <a asp-action="Index"
+                               asp-route-sortOrder="@(Model.SortingCandidetes.RegionSort)"
+                               asp-route-name="@(Model.FilterCandidetes.SelectedName)"
+                               asp-route-location1="@(Model.FilterCandidetes.SelectedLocation)"
+                               asp-route-levels1="@(Model.FilterCandidetes.SelectedLevel)">
+                                Viloyat
+                            </a>
+                        </th>
+
+                        <th>
+                            Batafsil
+                        </th>
+                        <th>
+                            O'zgartirish
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.CandidViewstab)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Can_fio)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Pnfl)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Lan)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Lev)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Region)
+                            </td>
+                            <td>
+                                <a asp-action="Details" asp-route-id="@item.Can_id" class="btn btn-outline-info">Batafsil</a>
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.Can_id" class="btn btn-outline-primary">O'zgartirish</a>
+                            </td>
+                        </tr>
+                    }
+                    <tr><td><b>Jami soni</b></td><td><b>@Html.DisplayFor(Model => Model.countall)</b></td><td></td><td></td> <td></td> <td></td> <td></td><td></td></tr>
+                </tbody>
+            </table>
+        </div>
+        @* @if (Model.PageViewModel.HasPreviousPage)
+        {
+            <a asp-action="Index"
+               asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
+               asp-route-name="@(Model.FilterCandidetes.SelectedName)"
+               asp-route-company="@(Model.FilterCandidetes.SelectedLocation)"
+               asp-route-type="@(Model.FilterCandidetes.SelectedLevel)"
+               asp-route-sortorder="@(Model.SortingCandidetes.current)"
+               class="btn  btn-outline-dark">
+                <i class="glyphicon glyphicon-chevron-left"></i>
+                Назад
+            </a>
+        }
+        @if (Model.PageViewModel.HasNextPage)
+        {
+            <a asp-action="Index"
+               asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
+               asp-route-name="@(Model.FilterCandidetes.SelectedName)"
+               asp-route-company="@(Model.FilterCandidetes.SelectedLocation)"
+               asp-route-type="@(Model.FilterCandidetes.SelectedLevel)"
+               asp-route-sortorder="@(Model.SortingCandidetes.current)"
+               class="btn btn-outline-dark">
+                Вперед
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </a>
+        }*@
+        <page-link page-model="Model.PageViewModel" page-action="Index"
+                   page-url-name="@(Model.FilterCandidetes.SelectedName)"
+                   page-url-location1="@(Model.FilterCandidetes.SelectedLocation)"
+                   page-url-levels1="@(Model.FilterCandidetes.SelectedLevel)"
+                   page-url-sortorder="@(Model.SortingCandidetes.current)"></page-link>
+    </div>
+</div>
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger">
+                <h5 class="modal-title" id="staticBackdropLabel">Ogohlantirish!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Nomzodlarning barchasini o'chirmoqchimisiz?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Yo'q</button>
+                <a asp-action="DeleteAll" class="btn btn-danger">Ha</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+  @*  window.onload = function ()
+    {
+        const state = { 'page_id': 1, 'user_id': 5 }
+        const title = ''
+        const url = 'dtm.uz'
+
+        history.pushState(state, title, url)
+    }*@
+
+</script>

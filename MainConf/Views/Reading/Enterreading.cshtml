@@ -1,0 +1,339 @@
+﻿<style>
+    .container2 {
+        position: fixed;
+        bottom: 1px;
+        right: 2px;
+        width: 20%;
+        border: solid;
+        border-style: double;
+        border-radius: 2%;
+        background-color: white;
+    }
+
+    #main2 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .row {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .pids-wrapper {
+        width: 100%;
+    }
+
+    .pid {
+        width: calc(10% - 10px);
+        height: 10px;
+        display: inline-block;
+        margin: 5px;
+    }
+</style>
+
+<link href="~/css/site.css" rel="stylesheet" />
+@if (User.IsInRole("Candidate"))
+{
+    <div id="main2" class=" col-md-12 col-lg-12 col-12 order-2 order-md-1 " >
+        <div class="row col-lg-7">
+            <div class="row  col-lg-12  border-right border-left" style="padding-top:20px; ">
+                <p class="text-justify">
+             
+                    O‘zbekiston Respublikasi Prezidentining 1992-yil 11-martdagi “Respublika oliy o‘quv yurtlarining kunduzgi bo‘limlariga qabul qilishni takomillashtirish to‘g‘risida”gi PF-361-sonli farmoni mamalakatimiz oliy ta’lim muassasalariga qobiliyatli yoshlarni tanlab olish sohasida ta’limdagi tub islohotlarni boshlab berdi.
+
+                    Dastlab respublikamizning 6 ta oliy ta’lim muassasasida test sinovi asosida o‘qishga qabul qilish tajribadan o‘tkazilgan edi.
+
+                    O‘zbekiston Respublikasi Prezidenti farmoniga muvofiq 1992-yil 9-aprelda O‘zbekiston Respublikasi Prezidenti huzuridagi Vazirlar Mahkamasining “O‘zbekiston Respublikasi oliy o‘quv yurtlarining kunduzgi bo‘limlariga qabul qilish bo‘yicha eksperimentni tashkil etish va o‘tkazish to‘g‘risida” gi 181-sonli qarori qabul qilindi. Mazkur qarorda O‘zbekiston Respublikasi oliy o‘quv yurtlarining kunduzgi bo‘limlariga qabul qilish bo‘yicha eksperimentni tashkil etish va o‘tkazish belgilandi va 1992-yil 15-apreldan Vazirlar Mahkamasi huzurida Oliy o‘quv yurtlarining kunduzgi bo‘limlariga abiturientlar tanlash bo‘yicha Respublika markazi tashkil etildi. Markaz zimmasiga oliy o‘quv yurtlariga talabalar tanlab olish bo‘yicha yagona davlat siyosatini amalga oshirish va oliy o‘quv yurtlariga o‘qishga kirayotgan yoshlar uchun yagona mezonlar joriy etish, qabul va test texnologiyasi qoidalarini, eng qobiliyatli yoshlarni qidirib topish metodlarini ishlab chiqish kabi vazifalar yuklatildi.
+                    1993-yilda 46 ta oliy ta’lim muassasalarining 19 tasida tajriba tariqasida test sinovlari o‘tkazildi.
+
+                    1994-yil 14-maydagi 258-sonli O‘zbekiston Respublikasi Vazirlar Mahkamasining “O‘zbekiston Respublikasi Vazirlar Mahkamasi huzurida Davlat test markazi tashkil etish to‘g‘risida” gi qarori bilan Oliy o‘quv yurtlarining kunduzgi bo‘limlariga abiturientlar tanlash bo‘yicha Respublika markazi O‘zbekiston Respublikasi Vazirlar Mahkamasi huzuridagi Davlat test markaziga aylantirildi.
+                </p>
+            </div>
+            <div id="clears" class="row  col-lg-12 col-12">
+                <button id="inst" type="button" onclick="playme1()" class="btn btn-info btn-lg btn-block" data-toggle="modal" data-target="#staticBackdrop">
+                    <img src="~/images/icons/72.png" style="max-width:35px;" />Mikrafonni tekshirish
+                </button>
+            </div>
+
+            <div id="komputer" class="input-group p-4 mt-3 mb-3 col-sm-12 justify-content-center border-right border-left table-warning" style="display:none;">
+                <center>
+                    <div class="form-check" onclick="ChangeText()">
+                        <input class="form-check-input" type="checkbox" value="kampcheck" id="defaultCheck1">
+                        <label class="form-check-label " for="defaultCheck1">
+                            <b>Mikrafonni soz holatdaligini tasdiqlayman</b>
+                        </label>
+                    </div>
+                </center>
+            </div>
+            <div id="kom" class="row  col-lg-12 col-12" disabled style="padding-top:2%">
+
+                <button disabled onclick="myFunction123()" class="btn btn-info btn-lg btn-block">
+                    <img src="~/images/icons/61.png" style="max-width:35px;" /> Imtixonni boshlash
+                </button>
+
+            </div>
+        </div>
+    </div>
+    <div id="content1" style="display:none;"></div>
+   
+    @*Krirish tugamasi modali*@
+    <div class="modal fade" id="Modal123" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-warning">
+                    <h5 class="modal-title" id="exampleModalLabel">Ogohlantirish!!!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div id="indexmodal123" class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    @*Kameraga tekshirish modali*@
+    <div class="modal fade" id="exammod" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-warning">
+                    <h5 class="modal-title" id="exampleModalLabel">Ogohlantirish!!!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Sizda kamera bilan xatolik. Iltimos video kamerani sozligni tekshiring. DTM xodimlariga murajat qiling.
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-gradient-info">
+                    <h4 class="modal-title" id="staticBackdropLabel">Pastdagi keltirilgan matn o'qing</h4>
+                </div>
+                <div class="modal-body" style="text-align:justify">
+                    <h5>O'zbek tilining tarixiy negizlari Oltoy tillar oilasining turkiy tillar turkumiga mansub. Mutaxassislarning ta'kidicha, o'zbek tili o'z tarixiy jarayonida ushbu bosqichlarni bosib o'tgan.</h5>
+                </div>
+                <div class="modal-footer">
+                    <center id="checkimicfooter"></center>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-warning">
+                    <h5 class="modal-title" id="exampleModalLabel">Iltimos avval mikrafonni tekshiring</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input id="voluem" type="hidden" value="100">
+    <canvas hidden id="canvas" style="overflow:auto"></canvas>
+    <div id="container1">
+        <video class="container2" autoplay id="video123">
+        </video>
+    </div>
+    <script>
+
+        
+    </script>
+    
+    <script>
+        var mic = 0;
+
+        var audio1;
+        function setsp() { }
+        function myFunction123() {
+            if (abs == 0) {
+                $("#exammod").modal('show');
+            } else {
+                Enterreading();
+            }
+        }
+        function Enterreading() {
+            if (!location.hash) {
+                location.hash = Math.floor(Math.random() * 0xFFFFFF).toString(16);
+            }
+
+            const roomHash = location.hash.substring(1);
+            //self.location.replace('/Reading/Examing');
+
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                data: { parameter1: roomHash },
+                url: "/Reading/Room",
+                success: function (data) {
+                    if (data.lets == true) {
+                        Photoinsertreading(1);
+
+
+                    } else {
+                        $("#Modal123").modal();
+                        $("#indexmodal123").empty();
+                        $("#indexmodal123").append(data.positions);
+
+                    }
+                }
+            });
+        }
+        function Photoinsertreading(a) {
+            var resultb641 = "";
+            var canvas = document.getElementById('canvas');
+            var video = document.getElementById('video123');
+            const context = canvas.getContext('2d');
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            canvas.width = 320;
+            canvas.height = 240;
+            canvas.getContext('2d').drawImage(video, 0, 0, 320, 240);
+            resultb641 = canvas.toDataURL();
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                data: { parameter1: resultb641, parameter2: a },
+                url: "/Reading/Photoinsert",
+                success: function (data) {
+                    if (data.lets == true) {
+                        self.location.replace('/Reading/Examing');
+
+                    } else {
+                        console.log("Rasm bazaga yuklanmadi");
+                    }
+                }
+            });
+        }
+        var abs = 0;
+        var video = document.querySelector("#video123");
+        if (navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function (stream) {
+                    video.srcObject = stream;
+                    abs = 1;
+                })
+                .catch(function (err0r) {
+                    abs = 0;
+                    console.log("kamera bn  xatolik!");
+
+                });
+        }
+        function vise() {
+            document.getElementById("komputer").style.display = 'block';
+        }
+        function ChangeText() {
+
+
+            if (mic == 0) {
+                $('#defaultCheck1').attr('checked', true);
+                $("#exampleModal").modal();
+                setTimeout(function () { $("#exampleModal").modal('hide'); }, 50000);
+            }
+            var chkb = document.getElementById('defaultCheck1');
+            if (!chkb.checked) {
+
+                document.getElementById('komputer').className = "input-group p-4 mt-3 mb-3 col-sm-12 justify-content-center border-right border-left table-warning";
+                $('#kom :input').attr('disabled', true);
+                // document.getElementById("myBtn").disabled = true;
+
+            }
+            else if (mic > 0) {
+
+                document.getElementById('komputer').className = "input-group p-4 mt-3 mb-3 col-sm-12 justify-content-center border-right border-left table-success ";
+                $('#kom :input').removeAttr('disabled');
+                //   document.getElementById("myBtn").disabled = false;
+
+            }
+        }
+        function SetVolume(val) {
+            document.getElementById('voluem').value = val;
+            audio1.volume = val / 100;
+            console.log(audio1.duration);
+        }
+
+        function playme1() {
+            $("#checkimicfooter").empty();
+            $("#checkimicfooter").append('<div class="spinner-grow text-info" role="status"></div >');
+            startrec1();
+            setTimeout(function () { stopme(); }, 8000);
+        };
+        function stopme() {
+            stoprec1();
+            var sp = $("#content1").text();
+            
+            if (sp.length > 0) {
+                mic = sp.length;
+                $("#content1").empty();
+                $("#checkimicfooter").empty();
+                $("#checkimicfooter").append('<button type="button" onclick="vise()"  class="btn btn-success" data-dismiss="modal">Yakunlash</button>');
+                document.getElementById("inst").disabled = true;
+                document.getElementById('inst').className = "btn btn-success btn-lg btn-block";
+
+            } else {
+                $("#checkimicfooter").empty();
+                $("#checkimicfooter").append('<button type="button" onclick="playme1()"  class="btn btn-warning" >Qayta tekshirish</button>');
+                mic = 0;
+            }
+
+        }
+        function startrec1() {
+            recognition.start();
+        }
+        function stoprec1() {
+            recognition.stop();
+        }
+        const content = document.getElementById('content1');
+
+        const recognition = new webkitSpeechRecognition();
+        recognition.continuous = true;
+        recognition.interimResults = true;
+        recognition.onresult = function (event) {
+            let result = '';
+            for (let i = event.resultIndex; i < event.results.length; i++) {
+                result += event.results[i][0].transcript;
+            }
+            content.innerText = result;
+        };
+      
+        function playSound(url) {
+            var audio = document.createElement('audio');
+            audio1 = audio;
+            audio.style.display = "none";
+            audio.src = url;
+            audio.autoplay = true;
+
+            audio.volume = (document.getElementById('voluem').value / 100);
+            console.log(audio1.duration);
+            audio.onended = function () {
+                audio.remove()
+                $("#clears").empty();
+                $("#clears").append('<button type="button" onclick="playme1()" class="btn btn-info btn-lg btn-block">' + '<img src ="\/images\/icons\/72.png" style = "max-width:35px;"\/>' + ' Quloqchinni tekshirish</button ' + '> ');
+            };
+            document.body.appendChild(audio);
+        }
+    </script>
+}
+
+
+<script src="~/js/jquery-1.11.2.min.js"></script>
+<script src="~/js/site.js"></script>
+<script src="~/js/listening/Listening.js"></script>
+

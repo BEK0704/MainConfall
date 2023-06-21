@@ -1,0 +1,133 @@
+﻿@using MainConf.TagHelpers;
+
+@model PartsViewModel
+@addTagHelper *, MainConf
+
+@{
+    ViewData["Title"] = " ";
+}
+
+
+<div class="card ">
+    <div class="card-header ">
+        <div class="row">
+            <form asp-controller="Part2" asp-action="Index" class=" row col-sm-12">
+                <div class="col-sm-3">
+                    <a class="btn btn-info" asp-action="Create">2 - Savol qo'shish!</a>
+                </div>
+
+                <div class="col-sm-3"><select class="form-control" name="levels1" asp-items="Model.FilteringPart.Levels1"></select></div>
+                <div class="col-sm-3"><input name="name" placeholder="Kalit so'z!" value="@Model.FilteringPart.SelectedName" autocomplete="off" class="form-control" /></div>
+                <div class="col-sm-3"><input type="submit" value="Qidiruv" class="btn btn-info" /></div>
+
+            </form>
+        </div>
+    </div>
+    <div class="card-body">
+
+        <div style="overflow-x:auto;">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            <a asp-action="Index"
+                               asp-route-sortOrder="@(Model.SortingPart.TitleSort)"
+                               asp-route-name="@(Model.FilteringPart.SelectedName)"
+                               asp-route-levels1="@(Model.FilteringPart.SelectedLevel)">
+                                Savol mazmuni
+                            </a>
+
+                        </th>
+                        <th>
+                            <a asp-action="Index"
+                               asp-route-sortOrder="@(Model.SortingPart.LanguageSort)"
+                               asp-route-name="@(Model.FilteringPart.SelectedName)"
+                               asp-route-levels1="@(Model.FilteringPart.SelectedLevel)">
+                                Darajasi
+                            </a>
+                        </th>
+                        <th>
+                            Vaqti
+                        </th>
+                        <th>
+                            <a asp-action="Index"
+                               asp-route-sortOrder="@(Model.SortingPart.ActiveSort)"
+                               asp-route-name="@(Model.FilteringPart.SelectedName)"
+                               asp-route-levels1="@(Model.FilteringPart.SelectedLevel)">
+                                Batafsil
+                            </a>
+
+                        </th>
+
+
+
+                    </tr>
+                </thead>
+                <tbody id="listbody">
+                    @foreach (var item in Model.Questionstab)
+                    {
+                        if (item.Actived == 1)
+                        {
+                            <tr class="table-success">
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Title)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Level)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Timeq) min
+                                </td>
+                                <td>
+                                    <a asp-action="Details" asp-route-id="@item.Id_part" class="btn btn-info">Batafsil</a>
+                                </td>
+
+
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr class="table-warning">
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Title)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Level)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Timeq) min
+                                </td>
+                                <td>
+                                    <a asp-action="Details" asp-route-id="@item.Id_part" class="btn btn-outline-info">Batafsil</a>
+                                </td>
+
+                            </tr>
+                        }
+                    }
+                    <tr>
+                        <td><b>Jami soni</b></td>
+                        <td><b>@Html.DisplayFor(Model => Model.countall)</b></td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+
+
+                        <td>
+                        </td>
+
+
+                        <td>
+                        </td>
+
+
+                    </tr>
+                </tbody>
+            </table>
+            <page-link page-model="Model.PageViewModel" page-action="Index"
+                       page-url-name="@(Model.FilteringPart.SelectedName)"
+                       page-url-levels1="@(Model.FilteringPart.SelectedLevel)"
+                       page-url-sortorder="@(Model.SortingPart.current)"></page-link>
+        </div>
+    </div>
+</div>

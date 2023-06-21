@@ -1,0 +1,385 @@
+﻿@model MainConf.Models.Seconds.IndexHome
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+<style>
+    #main2 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .row {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .pids-wrapper {
+        width: 100%;
+    }
+
+    .pid {
+        width: calc(10% - 10px);
+        height: 10px;
+        display: inline-block;
+        margin: 5px;
+    }
+</style>
+<link href="~/css/site.css" rel="stylesheet" />
+<div id="main2" class=" col-md-12 col-lg-12 col-12 order-2 order-md-1 ">
+
+    <div class="row col-lg-7">
+        <div class="col-12 col-sm-3 border-right border-left ">
+            <div class="row">
+                <center>
+                    @if (Model.Photos.Length < 50)
+                    {
+                        <img src="~/images/123.png" class=" col-sm-9" />
+                    }
+                    else
+                    {
+                        <img src="@ViewBag.imagesrc" class=" col-sm-9" />
+                    }
+                </center>
+
+
+            </div>
+
+        </div>
+        <div class="col-12 col-sm-9 border-right border-left ">
+            <input type="hidden" asp-for="Id" />
+            <dl class="row d-flex justify-content-start">
+                <dt class="col-sm-5">
+                    <img src="~/images/icons/31.png" style="max-width:30px;" /> @Localizer["familiy"]
+                </dt>
+                <dd class="col-sm-7">
+                    @Html.DisplayFor(model => model.Last_name)
+                </dd>
+                <dt class="col-sm-5">
+
+                    <img src="~/images/icons/32.png" /> @Localizer["name_c"]
+                </dt>
+                <dd class="col-sm-7">
+                    @Html.DisplayFor(model => model.First_name)
+                </dd>
+                <dt class="col-sm-5"><img src="~/images/icons/33.png" style="max-width:30px;" /> @Localizer["s_name"]</dt>
+                <dd class="col-sm-7">
+                    @Html.DisplayFor(model => model.S_name)
+                </dd>
+                <dt class="col-sm-5">
+                    <img src="~/images/icons/29.png" style="max-width:30px;" /> @Localizer["lan_c"]
+                </dt>
+                <dd class="col-sm-7">
+                    @Html.DisplayFor(model => model.Language)
+                </dd>
+                <dt class="col-sm-5">
+                    <img src="~/images/icons/30.png" style="max-width:30px;" /> @Localizer["lev_c"]
+                </dt>
+                <dd class="col-sm-7">
+                    @Html.DisplayFor(model => model.Level)
+                </dd>
+                <dt class="col-sm-5">
+                    <img src="~/images/icons/26.png" style="max-width:30px;" />  @Localizer["phone"]:
+                </dt>
+                <dd class="col-sm-7">
+                    @Html.DisplayFor(model => model.Phones)
+                </dd>
+                <dt class="col-sm-5">
+                    <img src="~/images/30.png" style="max-width:30px;" /> @Localizer["devices"]
+                </dt>
+                <dd class="col-sm-7">
+                    <a class="btn btn-outline-primary" asp-action="Checking">@Localizer["test"]</a>
+                </dd>
+                @if (User.IsInRole("Export"))
+                {
+                    <dt class="col-sm-5">
+                        <img src="~/images/icons/77.png" style="max-width:30px;" /> @Localizer["expert1"]
+                    </dt>
+                    <dd class="col-sm-7">
+                        <b style="color:red;">@Html.DisplayFor(model => model.Speak)</b>
+                    </dd>
+
+                    <dt class="col-sm-5">
+                        <img src="~/images/icons/71.png" style="max-width:30px;" /> @Localizer["expert2"]
+                    </dt>
+                    <dd class="col-sm-7">
+                        <b style="color:red;"> @Html.DisplayFor(model => model.Auido)</b>
+                    </dd>
+                }
+
+                @if (User.IsInRole("Examiner"))
+                {
+                    <dt class="col-sm-5">
+                        <img src="~/images/icons/77.png" style="max-width:30px;" /> @Localizer["expert3"]
+                    </dt>
+                    <dd class="col-sm-7">
+                        <b style="color:red;">@Html.DisplayFor(model => model.LastCount)</b>
+                    </dd>
+                }
+
+                @if (User.IsInRole("Export"))
+                {
+                    <div class="col-sm-1">
+                        <div id="speakcircle" class="circle"></div>
+                    </div>
+
+                    <dt class="col-sm-7">
+                        @Localizer["online_user"]
+                    </dt>
+
+                    <dt class="col-sm-4">
+                        <p id="idspeaking"><b>0</b></p>
+                    </dt>
+                    <div class="col-sm-1">
+                        <div id="audiocircle" class="circle"></div>
+                    </div>
+
+                    <dt class="col-sm-7">
+                        @Localizer["offline_user"]
+                    </dt>
+
+                    <dt class="col-sm-4">
+                        <p id="idaudio"><b>0</b></p>
+                    </dt>
+
+                }
+
+                @if (User.IsInRole("Examiner"))
+                {
+
+                    <div class="col-sm-1">
+                        <div id="speakcircle2" class="circle"></div>
+                    </div>
+
+                    <dt class="col-sm-7">
+                        @Localizer["last_work"]
+                    </dt>
+
+                    <dt class="col-sm-4">
+                        <p id="idaudio2"><b>0</b></p>
+                    </dt>
+                }
+            </dl>
+        </div>
+        @if (!User.IsInRole("Admin"))
+        {
+          @*  <div class="row  col-lg-12  border-right border-left" style="padding-top:20px; ">
+                <p class="text-justify">
+                    O‘zbekiston Respublikasi Prezidentining 1992-yil 11-martdagi “Respublika oliy o‘quv yurtlarining kunduzgi bo‘limlariga qabul qilishni takomillashtirish to‘g‘risida”gi PF-361-sonli farmoni mamalakatimiz oliy ta’lim muassasalariga qobiliyatli yoshlarni tanlab olish sohasida ta’limdagi tub islohotlarni boshlab berdi.
+
+                    Dastlab respublikamizning 6 ta oliy ta’lim muassasasida test sinovi asosida o‘qishga qabul qilish tajribadan o‘tkazilgan edi.
+
+                    O‘zbekiston Respublikasi Prezidenti farmoniga muvofiq 1992-yil 9-aprelda O‘zbekiston Respublikasi Prezidenti huzuridagi Vazirlar Mahkamasining “O‘zbekiston Respublikasi oliy o‘quv yurtlarining kunduzgi bo‘limlariga qabul qilish bo‘yicha eksperimentni tashkil etish va o‘tkazish to‘g‘risida” gi 181-sonli qarori qabul qilindi. Mazkur qarorda O‘zbekiston Respublikasi oliy o‘quv yurtlarining kunduzgi bo‘limlariga qabul qilish bo‘yicha eksperimentni tashkil etish va o‘tkazish belgilandi va 1992-yil 15-apreldan Vazirlar Mahkamasi huzurida Oliy o‘quv yurtlarining kunduzgi bo‘limlariga abiturientlar tanlash bo‘yicha Respublika markazi tashkil etildi. Markaz zimmasiga oliy o‘quv yurtlariga talabalar tanlab olish bo‘yicha yagona davlat siyosatini amalga oshirish va oliy o‘quv yurtlariga o‘qishga kirayotgan yoshlar uchun yagona mezonlar joriy etish, qabul va test texnologiyasi qoidalarini, eng qobiliyatli yoshlarni qidirib topish metodlarini ishlab chiqish kabi vazifalar yuklatildi.
+                    1993-yilda 46 ta oliy ta’lim muassasalarining 19 tasida tajriba tariqasida test sinovlari o‘tkazildi.
+
+                    1994-yil 14-maydagi 258-sonli O‘zbekiston Respublikasi Vazirlar Mahkamasining “O‘zbekiston Respublikasi Vazirlar Mahkamasi huzurida Davlat test markazi tashkil etish to‘g‘risida” gi qarori bilan Oliy o‘quv yurtlarining kunduzgi bo‘limlariga abiturientlar tanlash bo‘yicha Respublika markazi O‘zbekiston Respublikasi Vazirlar Mahkamasi huzuridagi Davlat test markaziga aylantirildi.
+                </p>
+            </div>*@
+    <!--<div class="row  col-sm-12  border-right border-left" style="padding-top:2%; ">-->
+        @* <div class="pids-wrapper">
+            <div class="pid"></div>
+            <div class="pid"></div>
+            <div class="pid"></div>
+            <div class="pid"></div>
+            <div class="pid"></div>
+            <div class="pid"></div>
+            <div class="pid"></div>
+            <div class="pid"></div>
+            <div class="pid"></div>
+            <div class="pid"></div>
+        </div>*@
+        <!--<h2>Audio record and playback</h2>
+        <p>
+            <label for="audioSource">Audio input source: </label>
+            <select id="audioSource"></select>
+        </p>
+        <p>
+            <button id=startRecord>start</button>
+            <button id=stopRecord disabled>stop</button>
+        </p>
+        <p>
+            <audio id=recordedAudio></audio>
+            <a id=audioDownload></a>
+        </p>
+    </div>-->
+        <div id="komputer" class="input-group p-4 mt-3 mb-3 col-sm-12 justify-content-center border-right border-left table-warning">
+
+            <div class="form-check" onclick="ChangeText()">
+                <input class="form-check-input" type="checkbox" value="kampcheck" id="defaultCheck1">
+                <label class="form-check-label " for="defaultCheck1">
+                    <b>@Localizer["agree"]</b>
+                </label>
+            </div>
+
+
+        </div>
+        }
+    <div id="kom" class="row  col-lg-12 " disabled>
+     @*   @if (User.IsInRole("Candidate"))
+        {
+            <button disabled type="button"  class="btn btn-info btn-lg btn-block">
+
+                <img src="~/images/icons/61.png" style="max-width:35px;" /> Listening
+            </button>
+            <button disabled type="button"  class="btn btn-info btn-lg btn-block">
+
+                <img src="~/images/5.png" style="max-width:35px;" /> Reading
+            </button>
+            <button disabled type="button"  class="btn btn-info btn-lg btn-block">
+
+                <img src="~/images/4.png" style="max-width:35px;" /> Writing
+            </button>
+        }*@
+        @if (User.IsInRole("Export") && Model.RoomK == 1 || User.IsInRole("Candidate") && Model.RoomK == 1)
+        {
+            <button disabled type="button" onclick="myFunction()" class="btn btn-info btn-lg btn-block">
+
+                <img src="~/images/icons/36.png" style="max-width:35px;" /> @Localizer["start_ex"]
+            </button>
+
+        }
+        @if (User.IsInRole("Export") && Model.SeconroomK == 1)
+        {
+            <button onclick="SecondRoom1()" class="btn btn-info btn-lg btn-block" style="padding-top:1%;" disabled>
+                <img src="~/images/icons/61.png" style="max-width:35px;" /> @Localizer["listening"]
+            </button>
+        }
+        @if (User.IsInRole("Examiner") && Model.ThirdrooK == 1)
+        {
+            <button onclick="ThirdRoom1()" class="btn btn-success btn-lg btn-block" style="padding-top:1%;" disabled>
+                <img src="~/images/icons/61.png" style="max-width:35px;" /> @Localizer["last_mark"]
+            </button>
+
+        }
+    </div>
+    </div>
+
+</div>
+<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-warning">
+                <h5 class="modal-title" id="exampleModalLabel">@Localizer["warning"]</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="indexmodal" class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="~/js/jquery-1.11.2.min.js"></script>
+<script>
+
+    function ChangeText() {
+        var chkb = document.getElementById('defaultCheck1');
+
+        if (!chkb.checked) {
+
+            document.getElementById('komputer').className = "input-group p-4 mt-3 mb-3 col-sm-12 justify-content-center border-right border-left table-warning";
+            $('#kom :input').attr('disabled', true);
+            // document.getElementById("myBtn").disabled = true;
+
+        }
+        else {
+
+            document.getElementById('komputer').className = "input-group p-4 mt-3 mb-3 col-sm-12 justify-content-center border-right border-left table-success ";
+            $('#kom :input').removeAttr('disabled');
+            //   document.getElementById("myBtn").disabled = false;
+
+        }
+    }
+ 
+</script>
+
+@if (User.IsInRole("Export") && !User.IsInRole("Examiner"))
+{
+
+    <script>
+        var x = setInterval(function () {
+            $.ajax({
+                type: 'GET',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                url: "/Home/Countsall",
+
+                success: function (data) {
+
+                    document.getElementById('idspeaking').innerHTML = '<b>' + data.speak + '</b>';
+                    document.getElementById('idaudio').innerHTML = '<b>' + data.auido + '</b>';
+                    if (data.speak == 0)
+                        document.getElementById('speakcircle').style.backgroundColor = "red";
+                    else document.getElementById('speakcircle').style.backgroundColor = "green";
+                    if (data.auido == 0)
+                        document.getElementById('audiocircle').style.backgroundColor = "red";
+                    else document.getElementById('audiocircle').style.backgroundColor = "green";
+                }
+            });
+        }, 3000);
+    </script>
+}
+
+@if (User.IsInRole("Examiner") && !User.IsInRole("Export"))
+{
+    <script>
+        var x = setInterval(function () {
+            $.ajax({
+                type: 'GET',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                url: "/Home/Countsall1",
+
+                success: function (data) {
+
+                    document.getElementById('idaudio2').innerHTML = '<b>' + data.auido + '</b>';
+                    if (data.auido == 0)
+                        document.getElementById('speakcircle2').style.backgroundColor = "red";
+                    else document.getElementById('speakcircle2').style.backgroundColor = "green";
+
+                }
+            });
+        }, 3000);
+    </script>
+}
+@if (User.IsInRole("Examiner") && User.IsInRole("Export"))
+{
+    <script>
+        var x = setInterval(function () {
+            $.ajax({
+                type: 'GET',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                url: "/Home/Countsall",
+
+                success: function (data) {
+
+                    document.getElementById('idspeaking').innerHTML = '<b>' + data.speak + '</b>';
+                    document.getElementById('idaudio').innerHTML = '<b>' + data.auido + '</b>';
+                    if (data.speak == 0)
+                        document.getElementById('speakcircle').style.backgroundColor = "red";
+                    else document.getElementById('speakcircle').style.backgroundColor = "green";
+                    if (data.auido == 0)
+                        document.getElementById('audiocircle').style.backgroundColor = "red";
+                    else document.getElementById('audiocircle').style.backgroundColor = "green";
+                }
+            });
+            $.ajax({
+                type: 'GET',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                url: "/Home/Countsall1",
+
+                success: function (data) {
+
+                    document.getElementById('idaudio2').innerHTML = '<b>' + data.auido + '</b>';
+                    if (data.auido == 0)
+                        document.getElementById('speakcircle2').style.backgroundColor = "red";
+                    else document.getElementById('speakcircle2').style.backgroundColor = "green";
+
+                }
+            });
+        }, 3000);
+    </script>
+}

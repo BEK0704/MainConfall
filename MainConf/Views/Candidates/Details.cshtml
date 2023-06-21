@@ -1,0 +1,461 @@
+﻿@model MainConf.Models.Seconds.CanDetails
+
+@{
+    ViewData["Title"] = "Batafsil";
+}
+<div class="row">
+    <div class="card col-sm-6  col-md-6 col-lg-6" style="margin-top:1%">
+        <div class="card-header bg-info">
+            <h3 class="card-title">Nomzod ma'lumotlari!</h3>
+        </div>
+        <div class=" card-body row ">
+            <div class=" col-md-5 col-lg-5 ">
+                <div class="row">
+                    <center>
+                        @if (Model.Photo.Length < 50)
+                        {
+                            <img src="~/images/123.png" class=" col-sm-9" />
+                        }
+                        else
+                        {
+                            <img src="@Model.Photo" class=" col-sm-9" />
+                        }
+                    </center>
+
+
+                </div>
+
+            </div>
+            <div class="row col-md-6 col-lg-6" style="margin-top:1%">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Can_id" />
+
+                <dl class="row">
+                    <dt class="col-sm-4">
+                        Nomzod FIO
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Can_fio)
+                    </dd>
+                    <dt class="col-sm-4">
+                        Nomzod JSHIR
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Pnfl)
+                    </dd>
+                    <dt class="col-sm-4">
+                        Tili
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Lan)
+                    </dd>
+                    <dt class="col-sm-4">
+                        Darajasi
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Lev)
+                    </dd>
+
+                    <dt class="col-sm-4">
+                        Viloyat
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Region)
+                    </dd>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <dt class="col-sm-4">
+                            O'xshashlik darajasi
+                        </dt>
+                        <dd class="col-sm-8">
+                            <button type="button" onclick="faceupdate()" class="btn btn-primary">
+                                O'zgartirish
+                            </button>
+                        </dd>
+
+                    } 
+                    @if (Model.EnterPhoto.Length > 50)
+                    {
+                        <dt class="col-sm-4">
+                            Face control
+                        </dt>
+                        <dd class="col-sm-8">
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal14">
+                                Batafsil
+                            </button>
+                        </dd>}
+                        @if (Model.Exp1 == 1)
+                        {
+                            
+                            <dt class="col-sm-4" style="color:red;">
+                                Yakuniy baho
+                            </dt>
+                            <dd class="col-sm-8" style="color:red;">
+                                <b>@Html.DisplayFor(model => model.LastM)</b>
+                            </dd>
+                            <dt class="col-sm-4" style="color:green;">
+                                Boshlagan vaqt
+                            </dt>
+                            <dd class="col-sm-8" style="color:green;">
+                                <b>@Html.DisplayFor(model => model.Starttime)</b>
+                            </dd>
+                            <dt class="col-sm-4" style="color:blue;">
+                                Yakunlagan vaqt
+                            </dt>
+                            <dd class="col-sm-8" style="color:blue;">
+                                <b>@Html.DisplayFor(model => model.Endtime)</b>
+                            </dd>
+                            <dt class="col-sm-4">
+                                Savollar
+                            </dt>
+                            <dd class="col-sm-8">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                    Barcha savollar
+                                </button>
+                            </dd>
+                            <dt class="col-sm-4">
+                                Rasmlar
+                            </dt>
+                            <dd class="col-sm-8">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1">
+                                    Barcha rasmlar
+                                </button>
+                            </dd>
+                            <dt class="col-sm-2">
+                                Audio
+                            </dt>
+                            <dd class="col-sm-10">
+                                <audio controls autoplay playsinline>
+                                    <source src="@Url.Content(Model.Audiolink)" type="audio/mp3">
+                                </audio>
+                            </dd>
+                        }
+
+                    </dl>
+            </div>
+        </div>
+    </div>
+    @if (Model.Exp1 == 1)
+    {
+        <div class="card col-sm-6 col-md-6 col-lg-6" style="margin-top:1%;">
+            <div class="card-header bg-info">
+                <h3>1-Ekspert: @Html.DisplayFor(model => model.Exp1_fio)</h3>
+            </div>
+            <div class="card-body row">
+                <div class="col-12 col-sm-7 col-md-7 col-lg-7  ">
+
+                    <dl class="row d-flex justify-content-start">
+                        <dt class="col-sm-9">
+                            So'z boyligi:
+                        </dt>
+                        <dd class="col-sm-3">
+                            @Html.DisplayFor(model => model.Mark1.Word)
+                        </dd>
+                        <dt class="col-sm-9">
+                            Grammatika:
+                        </dt>
+                        <dd class="col-sm-3">
+                            @Html.DisplayFor(model => model.Mark1.Gramma)
+                        </dd>
+                        <dt class="col-sm-9">
+                            Nutq ravonligi va matn yaxlitligi:
+                        </dt>
+                        <dd class="col-sm-3">
+                            @Html.DisplayFor(model => model.Mark1.Speech)
+                        </dd>
+                        <dt class="col-sm-9">
+                            Kommunikativ samardorlik:
+                        </dt>
+                        <dd class="col-sm-3">
+                            @Html.DisplayFor(model => model.Mark1.Communicative)
+                        </dd>
+                        <dt class="col-sm-9">
+                            Talaffuz:
+                        </dt>
+                        <dd class="col-sm-3">
+                            @Html.DisplayFor(model => model.Mark1.Pronunciation)
+                        </dd>
+                    </dl>
+                </div>
+                <div class=" col-sm-4 col-md-4 col-lg-4  ">
+                    @Html.DisplayFor(model => model.Mark1.Comments)
+                </div>
+                <div class=" col-sm-12 col-md-12 col-lg-12  ">
+                    <dl class="row d-flex justify-content-start"><dt class="col-sm-8">Nomzodning jami balli<dt><dd class="col-sm-3"><b>@Html.DisplayFor(model => model.Exp1_mark)</b></dd></dl>
+                </div>
+            </div>
+        </div>
+    }
+    @if (Model.Exp2 == 1)
+    {
+        <div class="card col-sm-6 col-md-6 col-lg-6" style="margin-top:1%;">
+            <div class="card-header bg-info">
+                <h3>2-Ekspert: @Html.DisplayFor(model => model.Exp2_fio) </h3>
+            </div>
+            <div class="card-body row">
+                <div class="col-12 col-sm-7 col-md-7 col-lg-7  ">
+
+                    <dl class="row d-flex justify-content-start">
+                        <dt class="col-sm-9">
+                            So'z boyligi:
+                        </dt>
+                        <dd class="col-sm-3">
+                            @Html.DisplayFor(model => model.Mark2.Word)
+                        </dd>
+                        <dt class="col-sm-9">
+                            Grammatika:
+                        </dt>
+                        <dd class="col-sm-3">
+                            @Html.DisplayFor(model => model.Mark2.Gramma)
+                        </dd>
+                        <dt class="col-sm-9">
+                            Nutq ravonligi va matn yaxlitligi:
+                        </dt>
+                        <dd class="col-sm-3">
+                            @Html.DisplayFor(model => model.Mark2.Speech)
+                        </dd>
+                        <dt class="col-sm-9">
+                            Kommunikativ samardorlik:
+                        </dt>
+                        <dd class="col-sm-3">
+                            @Html.DisplayFor(model => model.Mark2.Communicative)
+                        </dd>
+                        <dt class="col-sm-9">
+                            Talaffuz:
+                        </dt>
+                        <dd class="col-sm-3">
+                            @Html.DisplayFor(model => model.Mark2.Pronunciation)
+                        </dd>
+                    </dl>
+                </div>
+                <div class=" col-sm-4 col-md-4 col-lg-4  ">
+                    @Html.DisplayFor(model => model.Mark2.Comments)
+                </div>
+                <div class=" col-sm-12 col-md-12 col-lg-12  ">
+                    <dl class="row d-flex justify-content-start"><dt class="col-sm-8">Nomzodning jami balli<dt><dd class="col-sm-3"><b>@Html.DisplayFor(model => model.Exp2_mark)</b></dd></dl>
+                </div>
+            </div>
+        </div>
+    }
+    @if (Model.Exp3 == 1)
+    {
+        <div class="card col-sm-6 col-6 col-md-6 col-lg-6" style="margin-top:1%;">
+            <div class="card-header bg-info">
+                <h3>3-Ekspert: @Html.DisplayFor(model => model.Exp3_fio) </h3>
+            </div>
+            <div class="card-body row">
+                <div class="col-12 col-sm-7 col-md-7 col-lg-7  ">
+
+                    <dl class="row d-flex justify-content-start">
+                        <dt class="col-sm-9">
+                            So'z boyligi:
+                        </dt>
+                        <dd class="col-sm-3">
+                            @Html.DisplayFor(model => model.Mark3.Word)
+                        </dd>
+                        <dt class="col-sm-9">
+                            Grammatika:
+                        </dt>
+                        <dd class="col-sm-3">
+                            @Html.DisplayFor(model => model.Mark3.Gramma)
+                        </dd>
+                        <dt class="col-sm-9">
+                            Nutq ravonligi va matn yaxlitligi:
+                        </dt>
+                        <dd class="col-sm-3">
+                            @Html.DisplayFor(model => model.Mark3.Speech)
+                        </dd>
+                        <dt class="col-sm-9">
+                            Kommunikativ samardorlik:
+                        </dt>
+                        <dd class="col-sm-3">
+                            @Html.DisplayFor(model => model.Mark3.Communicative)
+                        </dd>
+                        <dt class="col-sm-9">
+                            Talaffuz:
+                        </dt>
+                        <dd class="col-sm-3">
+                            @Html.DisplayFor(model => model.Mark3.Pronunciation)
+                        </dd>
+                    </dl>
+                </div>
+                <div class=" col-sm-4 col-md-4 col-lg-4  ">
+                    @Html.DisplayFor(model => model.Mark3.Comments)
+                </div>
+                <div class=" col-sm-12 col-md-12 col-lg-12  ">
+                    <dl class="row d-flex justify-content-start"><dt class="col-sm-8">Nomzodning jami balli<dt><dd class="col-sm-3"><b>@Html.DisplayFor(model => model.Exp3_mark)</b></dd></dl>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+<input type="hidden" asp-for="Pnfl" id="pnfl"/>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Savollar!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h3><b>Part1</b></h3>
+                <p>@Html.Raw(Model.Part1)</p>
+                <h3><b>Part2</b></h3>
+                <p>@Html.Raw(Model.Part2)</p>
+                <h3><b>Part3</b></h3>
+                <p>@Html.Raw(Model.Part3)</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Yopish</button>
+                
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel1">Rasmlar!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h3><b>Part1</b></h3>
+                <img src="@Model.Photo1" />
+                <h3><b>Part2</b></h3>
+                <img src="@Model.Photo2" />
+                <h3><b>Part3</b></h3>
+                <img src="@Model.Photo3" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Yopish</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal12" tabindex="-1" aria-labelledby="exampleModalLabel12" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-warning">
+                <h5 class="modal-title" id="exampleModalLabel12">Yuzni tanish darajasinni o'zgartirish.</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span  class="input-group-text ">O'xshashlik darajasi</span>
+                    </div>
+                    <input id="daraja" type="number"  class="form-control" autocomplete="off" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Bekor qilish</button>
+                <button type="button" onclick="facesave()" class="btn  btn-success">Saqlash</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal14" tabindex="-1" aria-labelledby="exampleModalLabel14" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-info">
+                <h5 class="modal-title" id="exampleModalLabel14">Face Control.</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body row">
+                <div class="alert alert-success col-sm-12" role="alert">
+                   <center> O'xshashlik darajasi: <b>@Html.DisplayFor(model => model.Entertol)</b></center>
+                </div>
+                
+                    <table class="table">
+                       
+                        <tbody>
+                            <tr>
+                                <td>
+                                    @if (Model.Photo.Length < 50)
+                                    {
+                                        <img style="max-height:240px; max-width:100%;" src="~/images/123.png" />
+                                    }
+                                    else
+                                    {
+                                        <img style="        max-height: 240px; max-width:100%;" src="@Model.Photo" />
+                                    }
+                                </td>
+                                <td>
+                                    @if (Model.EnterPhoto.Length < 50)
+                                    {
+                                        <img style="        max-height: 240px; max-width: 100%;" src="~/images/123.png" />
+                                    }
+                                    else
+                                    {
+                                        <img style="        max-height: 240px;  max-width: 100%;" src="@Model.EnterPhoto" />
+                                    }
+                                                            </td>
+                               
+                            </tr>
+                         
+                        </tbody>
+                    </table>
+                    
+                
+                <div class="alert alert-info col-sm-12" role="alert">
+                    <center>Vaqti: <b>@Html.DisplayFor(model => model.Entertime)</b></center>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Yopish.</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function faceupdate() {
+       
+        $.ajax({
+            type: 'POST',
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            data: { parameter1: document.getElementById("pnfl").value },
+            url: "/Account/Entering1",
+            success: function (data) {
+                if (data.lets) {
+                    document.getElementById("daraja").value = (1 - data.positions) * 100;
+                    $("#exampleModal12").modal('show');
+                }
+            }
+        });
+       
+    }
+    function facesave() {
+        var a = document.getElementById("daraja").value;
+        a = (1 - (a / 100)).toFixed(1);
+
+        $.ajax({
+            type: 'POST',
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            data: { parameter1: document.getElementById("pnfl").value, parameter2:  a},
+            url: "/User/Entering1",
+            success: function (data) {
+                if (data.lets) {
+                  
+                    $("#exampleModal12").modal('hide');
+                } else {
+                    alert("Saqlashda xatolik");
+                }
+            }
+        });
+        console.log(a);
+
+    }
+</script >

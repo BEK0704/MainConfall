@@ -1,0 +1,63 @@
+﻿@model IEnumerable<MainConf.Models.Seconds.ErrorModel>
+
+@{
+    var a = 0;
+    ViewData["Title"] = "Error";
+}
+
+
+<div class="card " style="margin-top:1%;">
+    <div class="card-header bg-info">
+       <h3>Xatoliklar</h3>
+    </div>
+    <div class="card-body">
+        <div style="overflow-x:auto;">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            FIO nomzod
+                        </th>
+                        <th>
+                            Pnfl nomzod
+                        </th>
+                        <th>
+                            Viloyat
+                        </th>
+                        <th>
+                            FIO ekspert
+                        </th>
+                        <th>
+                            Sabab
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        a++;
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Can_fio)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Can_pnfl)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Region)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Exp_fio)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Cause)
+                            </td>
+                        </tr>
+                    }
+                <tr><td><b>Soni</b></td><td><b>@a</b></td><td></td><td></td><td></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
